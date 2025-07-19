@@ -12,7 +12,7 @@ interface LayoutProps {
 const Layout = ({children}:LayoutProps) => {
     const [isLeftSideBarOpen, setIsLeftSideBarOpen] = useState(false);
     return (
-        <div className="flex h-screen overflow-hidden relative">
+        <div className="flex min-h-screen overflow-hidden relative">
 
             {/* Overlay when sidebar opens on Mobile */}
             {isLeftSideBarOpen && <div

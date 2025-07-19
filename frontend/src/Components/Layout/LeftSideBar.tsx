@@ -24,7 +24,7 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
             <div>
                 {/* Logo */}
                 <div className='mb-10 px-2'>
-                    <h1 className='text-2xl font-bold'>Song Anh <span className='text-primary text-3xl'>.</span></h1>
+                    <h1 className='text-2xl font-bold'>ShopeeFood <span className='text-primary text-3xl'>.</span></h1>
                 </div>
 
                 {/* Navigation Links */}
