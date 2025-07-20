@@ -20,7 +20,6 @@ const Restaurants = () => {
         }
 
         //Sorting
-
         if(activeSort === 'rating'){
             results.sort((a,b)=> b?.rating - a?.rating);
         }
@@ -33,6 +32,8 @@ const Restaurants = () => {
         setFilteredRestaurants(results);
 
     },[restaurants,activeCuisine,activeSort]);
+
+
     return (
         <div className="pb-8">
             {/* Banner */}
@@ -64,8 +65,9 @@ const Restaurants = () => {
                     <div className="flex flex-wrap gap-2">
                         {
                             cuisineFilters.map(filter=>(
-                                <button key={filter.id} className={`px-4 py-2 rounded-full text-sm
-                         ${activeCuisine.id === filter.id ? 'bg-primary text-white' : 'bg-white'}`} onClick={()=> setActiveCuisine(filter)}>
+                                <button key={filter.id} className={`px-4 py-2 rounded-full text-sm 
+                                ${activeCuisine.id === filter.id ? 'bg-primary text-white' : 'bg-white'}`}
+                                        onClick={()=> setActiveCuisine(filter)}>
                                     {filter.name}
                                 </button>
                             ))
@@ -73,9 +75,9 @@ const Restaurants = () => {
                     </div>
                     <div className="flex items-center gap-2">
                         <AdjustmentsHorizontalIcon className='h-5 w-5 text-gray-500'/>
-                        <select className="bg-white border border-gray-200
-                 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                                value={activeSort} onChange={(e)=> setActiveSort(e.target.value)}>
+                        <select className="bg-white border border-gray-200 rounded-md px-3 py-2 text-sm
+                        focus:outline-none focus:ring-2 focus:ring-primary" value={activeSort}
+                                onChange={(e)=> setActiveSort(e.target.value)}>
                             {
                                 sortOptions?.map(option=>(
                                     <option key={option.id} value={option.id}>{option.name}</option>
@@ -84,10 +86,9 @@ const Restaurants = () => {
                         </select>
                     </div>
                 </div>
-
             </div>
 
-            {/* Resturants */}
+            {/* Restaurants */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {
                     filteredRestaurants?.map(restaurant=> (

@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import { ClockIcon, HeartIcon } from '@heroicons/react/24/outline'
 import Rating from './Rating.tsx'
 
-const RestuarantCard = ({id,image,name,favorite,cuisineType,priceRange,rating,ratingCount,deliveryTime,distance,minOrder}:Restaurant) => {
+const RestaurantCard = ({id,image,name,favorite,cuisineType,priceRange,rating,ratingCount,deliveryTime,distance,minOrder}:Restaurant) => {
     return (
         <Link to={`/restaurants/${id}`} key={id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg">
+            {/* Image and info displayed on image */}
             <div className='relative h-48'>
                 <img src={image} alt={name} className='w-full h-full object-cover'/>
                 <button className='absolute top-3 right-3 text-white hover:text-red-500 transition-colors'>
@@ -16,13 +17,18 @@ const RestuarantCard = ({id,image,name,favorite,cuisineType,priceRange,rating,ra
                     <p className='text-white text-sm'> {cuisineType} • {priceRange}</p>
                 </div>
             </div>
+
+            {/* Details below image */}
             <div className='p-4'>
+                {/* Rating */}
                 <div className='flex items-center gap-1 mb-2'>
                     <div className='flex'>
                         <Rating rating={rating}/>
                     </div>
                     <span className='text-sm text-gray-600'>{rating} ({ratingCount})</span>
                 </div>
+
+                {/* Distance and delivery time */}
                 <div className='flex items-center justify-between mb-2'>
                     <div className='flex items-center gap-1 text-sm text-gray-600'>
                         <ClockIcon className="h-4 w-4"/>
@@ -32,12 +38,14 @@ const RestuarantCard = ({id,image,name,favorite,cuisineType,priceRange,rating,ra
                         {distance} km away
                     </div>
                 </div>
+
+                {/* Minimum order */}
                 <div className='text-sm text-gray-600'>
                     Min. order: {minOrder}$
                 </div>
             </div>
         </Link>
-    )
-}
+    );
+};
 
-export default RestuarantCard
+export default RestaurantCard;

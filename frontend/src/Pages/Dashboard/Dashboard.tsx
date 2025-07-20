@@ -5,7 +5,7 @@ const Dashboard = () => {
     return (
         <div className="py-8">
             {/* Banner */}
-            <div className="bg-primary rounded-lg p-6 mb-8 flex items-center justify-between">
+            <div className="bg-primary relative rounded-lg p-6 mb-8 flex items-center justify-between">
                 <img src="/images/banner_2.png" alt="Discount Offer" className="h-48 object-cover"/>
 
                 <div className="absolute p-8">

@@ -1,4 +1,4 @@
-import SectionLink from "../Link/SectionLink.tsx";
+import SectionLink from "./SectionLink.tsx";
 import {foodTypeList} from "../../Commons/DataDummy.ts";
 
 const FoodTypesSection = () => {

@@ -1,5 +1,5 @@
 import {foodItems} from "../../Commons/DataDummy.ts";
-import SectionLink from "../Link/SectionLink.tsx";
+import SectionLink from "./SectionLink.tsx";
 import {HeartIcon, PlusIcon} from "@heroicons/react/24/solid";
 import type {FoodItem} from "../../Commons/Type.ts";
 
