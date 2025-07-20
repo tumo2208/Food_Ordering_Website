@@ -1,8 +1,17 @@
 import type { MenuCategory } from "../../Commons/Type";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import Rating from "./Rating";
+import { useAppDispatch } from "../../Store/hooks";
+import { addItem } from "../../Store/feature/cart";
+import {PlusIcon} from "@heroicons/react/24/solid";
 
-const RestaurantMenuCategory = (category: MenuCategory) => {
+interface RestaurantMenuCategory extends MenuCategory{
+    restaurantId:string;
+    restaurantName:string
+}
+
+const RestaurantMenuCategory = (category: RestaurantMenuCategory) => {
+    const dispatch = useAppDispatch();
 
     return (
         <div className="mb-8">
@@ -49,6 +58,20 @@ const RestaurantMenuCategory = (category: MenuCategory) => {
                         {/* Price */}
                         <div className="flex justify-between items-center">
                             <span className="font-bold text-primary">${item.price.toFixed(2)}</span>
+                            <button
+                                className="bg-primary text-white p-2 rounded-md hover:bg-amber-600 transition-colors"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    dispatch(addItem({
+                                        item: item as any,
+                                        restaurantId: category.restaurantId,
+                                        restaurantName: category.restaurantName,
+
+                                    }))
+                                }}
+                            >
+                                <PlusIcon className="h-5 w-5"/>
+                            </button>
                         </div>
                     </div>
                 ))}
