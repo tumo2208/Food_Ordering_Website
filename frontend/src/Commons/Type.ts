@@ -13,7 +13,6 @@ export interface FoodItem {
     name: string;
     price: number;
     image: string;
-    description?: string;
     rating: number;
     discount?: number;
     favorite?: boolean;
@@ -24,7 +23,18 @@ export interface FoodItem {
 export interface MenuCategory {
     id: number;
     name: string;
-    items: FoodItem[];
+    items: MenuItem[];
+}
+
+export interface MenuItem {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    image: string;
+    rating: number;
+    discount?: number;
+    favorite?: boolean;
 }
 
 export interface Restaurant {
