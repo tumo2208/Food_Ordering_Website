@@ -1,0 +1,11 @@
+email,password,name,phoneNumber,address,district,city,citizenId,dob,gender,role
+nguyen.van.nam@gmail.com,Password123!,Nguyễn Văn Nam,0987654321,123 Nguyễn Trãi,Thanh Xuân,Hà Nội,001200001234,1990-05-15,MALE,CUSTOMER
+tran.thi.mai@gmail.com,SecurePass456@,Trần Thị Mai,0912345678,456 Lê Lợi,Quận 1,Hồ Chí Minh,079200001567,1985-12-20,FEMALE,CUSTOMER
+le.hoang.duc@gmail.com,Manager789#,Lê Hoàng Đức,0976543210,789 Trần Hưng Đạo,Hải Châu,Đà Nẵng,043200002345,1988-08-10,MALE,CUSTOMER
+pham.thi.lan@gmail.com,StrongPass321$,Phạm Thị Lan,0934567890,321 Hoàng Diệu,Ngô Quyền,Hải Phòng,031200003456,1992-03-25,FEMALE,CUSTOMER
+vo.minh.tuan@gmail.com,Admin2024%,Võ Minh Tuấn,0901234567,654 Nguyễn Huệ,Quận 1,Hồ Chí Minh,079200004567,1982-11-08,MALE,CUSTOMER
+hoang.thi.thao@gmail.com,MyPass789&,Hoàng Thị Thảo,0945678901,987 Bạch Đằng,Hai Bà Trưng,Hà Nội,001200005678,1995-07-12,FEMALE,CUSTOMER
+nguyen.thanh.son@gmail.com,DeliveryGuy123*,Nguyễn Thành Sơn,0967890123,147 Lý Thường Kiệt,Tân Bình,Hồ Chí Minh,079200006789,1993-09-30,MALE,CUSTOMER
+bui.thi.hong@gmail.com,Kitchen456!,Bùi Thị Hồng,0923456789,258 Điện Biên Phủ,Bình Thạnh,Hồ Chí Minh,079200007890,1987-04-18,FEMALE,CUSTOMER
+dang.van.long@gmail.com,Customer789@,Đặng Văn Long,0956789012,369 Hai Bà Trưng,Đống Đa,Hà Nội,001200008901,1991-01-22,MALE,CUSTOMER
+le.thi.nhu@gmail.com,Support123#,Lê Thị Như,0989012345,741 Nguyễn Văn Linh,Ninh Kiều,Cần Thơ,092200009012,1994-06-05,FEMALE,CUSTOMER

@@ -1,0 +1,112 @@
+[
+  {
+    "restaurantName": "Phở Hà Nội Authentic",
+    "contactNumber": "0243855123",
+    "contactEmail": "contact@phohanoi.com",
+    "locationAddress": "45 Hàng Bồ",
+    "locationDistrict": "Hoàn Kiếm",
+    "locationCity": "Hà Nội",
+    "description": "Nhà hàng phở truyền thống Hà Nội với hương vị đậm đà, được gia truyền qua nhiều thế hệ. Chúng tôi tự hào mang đến những tô phở ngon nhất với nước dùng trong veo, thịt bò tươi ngon.",
+    "operatingHours": "06:00 - 22:00",
+    "cuisineTypes": ["Vietnamese", "Noodles", "Traditional"]
+  },
+  {
+    "restaurantName": "Sushi Tokyo Premium",
+    "contactNumber": "0287654321",
+    "contactEmail": "info@sushitokyo.vn",
+    "locationAddress": "123 Nguyễn Huệ",
+    "locationDistrict": "Quận 1",
+    "locationCity": "Hồ Chí Minh",
+    "description": "Nhà hàng sushi Nhật Bản cao cấp với đầu bếp người Nhật chính gốc. Nguyên liệu tươi sống được nhập khẩu trực tiếp từ Tsukiji, Tokyo.",
+    "operatingHours": "11:00 - 23:00",
+    "cuisineTypes": ["Japanese", "Sushi", "Sashimi", "Fine Dining"]
+  },
+  {
+    "restaurantName": "BBQ Garden Đà Nẵng",
+    "contactNumber": "0236123456",
+    "contactEmail": "order@bbqgarden.dn",
+    "locationAddress": "789 Lê Duẩn",
+    "locationDistrict": "Hải Châu",
+    "locationCity": "Đà Nẵng",
+    "description": "Nhà hàng BBQ nướng phong cách Hàn Quốc với không gian sân vườn thoáng mát. Thịt nướng tươi ngon, kim chi chuẩn vị Hàn Quốc.",
+    "operatingHours": "17:00 - 01:00",
+    "cuisineTypes": ["Korean", "BBQ", "Grilled", "Asian Fusion"]
+  },
+  {
+    "restaurantName": "Bún Chả Hương Liên",
+    "contactNumber": "0241234567",
+    "contactEmail": "huonglien@gmail.com",
+    "locationAddress": "24 Lê Văn Hưu",
+    "locationDistrict": "Hai Bà Trưng",
+    "locationCity": "Hà Nội",
+    "description": "Quán bún chả nổi tiếng Hà Nội, từng được Tổng thống Obama ghé thăm. Bún chả nướng than hoa thơm ngon, nem cua bể đặc sản.",
+    "operatingHours": "08:00 - 21:00",
+    "cuisineTypes": ["Vietnamese", "Grilled Pork", "Traditional", "Local Favorite"]
+  },
+  {
+    "restaurantName": "Pizza Italia Vera",
+    "contactNumber": "0289876543",
+    "contactEmail": "bella@pizzaitalia.vn",
+    "locationAddress": "456 Lê Lợi",
+    "locationDistrict": "Quận 3",
+    "locationCity": "Hồ Chí Minh",
+    "description": "Nhà hàng pizza Ý chính gốc với lò nướng gỗ truyền thống. Đầu bếp người Ý với hơn 20 năm kinh nghiệm, sử dụng nguyên liệu nhập khẩu từ Italia.",
+    "operatingHours": "10:00 - 23:30",
+    "cuisineTypes": ["Italian", "Pizza", "Pasta", "European"]
+  },
+  {
+    "restaurantName": "Hải Sản Tươi Sống Nha Trang",
+    "contactNumber": "0258765432",
+    "contactEmail": "nhatrang@haisantuoi.com",
+    "locationAddress": "12 Trần Phú",
+    "locationDistrict": "Nha Trang",
+    "locationCity": "Khánh Hòa",
+    "description": "Nhà hàng hải sản tươi sống view biển đẹp nhất Nha Trang. Hải sản được đánh bắt hàng ngày, chế biến theo nhiều phong cách Á - Âu.",
+    "operatingHours": "09:00 - 22:30",
+    "cuisineTypes": ["Seafood", "Vietnamese", "Coastal", "Fresh"]
+  },
+  {
+    "restaurantName": "Cơm Tấm Sài Gòn Xưa",
+    "contactNumber": "0283456789",
+    "contactEmail": "saigonxua@comtam.vn",
+    "locationAddress": "678 Nguyễn Trãi",
+    "locationDistrict": "Quận 5",
+    "locationCity": "Hồ Chí Minh",
+    "description": "Quán cơm tấm truyền thống Sài Gòn với không gian hoài cổ. Cơm tấm sườn nướng, chả trứng, bì cuốn đậm đà hương vị miền Nam.",
+    "operatingHours": "06:30 - 20:00",
+    "cuisineTypes": ["Vietnamese", "Southern", "Traditional", "Street Food"]
+  },
+  {
+    "restaurantName": "Hot Pot Paradise",
+    "contactNumber": "0234567890",
+    "contactEmail": "paradise@hotpot.com",
+    "locationAddress": "321 Ngô Quyền",
+    "locationDistrict": "Ngô Quyền",
+    "locationCity": "Hải Phòng",
+    "description": "Nhà hàng lẩu buffet với hơn 100 món nguyên liệu tươi ngon. Nước lẩu được nấu từ xương hầm 8 tiếng, rau củ organic tự trồng.",
+    "operatingHours": "16:00 - 23:00",
+    "cuisineTypes": ["Chinese", "Hot Pot", "Buffet", "Asian"]
+  },
+  {
+    "restaurantName": "Bánh Mì Việt Nam",
+    "contactNumber": "0292345678",
+    "contactEmail": "banhmi@vietnam.local",
+    "locationAddress": "159 Nguyễn Văn Linh",
+    "locationDistrict": "Ninh Kiều",
+    "locationCity": "Cần Thơ",
+    "description": "Tiệm bánh mì Việt Nam chuẩn vị miền Tây với bánh mì giòn tan, nhân đầy đặn. Đặc biệt là bánh mì chả cá, bánh mì thịt nướng tự làm.",
+    "operatingHours": "05:30 - 18:00",
+    "cuisineTypes": ["Vietnamese", "Sandwich", "Street Food", "Breakfast"]
+  },
+  {
+    "restaurantName": "Fine Dining Skybar",
+    "contactNumber": "0287777888",
+    "contactEmail": "reservation@skybar.luxury",
+    "locationAddress": "88 Đồng Khởi",
+    "locationDistrict": "Quận 1",
+    "locationCity": "Hồ Chí Minh",
+    "description": "Nhà hàng cao cấp tầng 45 với view toàn cảnh Sài Gòn về đêm. Thực đơn fusion Âu - Á tinh tế, cocktail signature độc đáo.",
+    "operatingHours": "18:00 - 02:00",
+    "cuisineTypes": ["Fine Dining", "Fusion", "Cocktails", "Luxury"]
+  }
+]
