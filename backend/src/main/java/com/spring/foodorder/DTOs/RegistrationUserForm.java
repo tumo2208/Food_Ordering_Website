@@ -1,7 +1,6 @@
 package com.spring.foodorder.DTOs;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.spring.foodorder.Enums.Gender;
 import com.spring.foodorder.Enums.UserRole;
 import jakarta.validation.constraints.Email;
@@ -9,13 +8,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
-public class RegistrationForm {
+public class RegistrationUserForm {
     @Email(message = "Invalid email format")
     @NotBlank(message = "Email is required")
     private String email;
@@ -51,17 +48,4 @@ public class RegistrationForm {
     private Gender gender;
 
     private UserRole role = UserRole.CUSTOMER;
-
-    // Restaurant Owner
-    private String restaurantName;
-    private String contactNumber;
-    @Email(message = "Invalid contact email format")
-    private String contactEmail;
-    private String locationAddress;
-    private String locationDistrict;
-    private String locationCity;
-    private String description;
-    private String operatingHours;
-    private List<String> cuisineTypes;
-    private MultipartFile restaurantImage;
 }

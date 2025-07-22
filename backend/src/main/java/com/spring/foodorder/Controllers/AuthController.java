@@ -2,7 +2,7 @@ package com.spring.foodorder.Controllers;
 
 import com.spring.foodorder.DTOs.LoginForm;
 import com.spring.foodorder.DTOs.LoginResponse;
-import com.spring.foodorder.DTOs.RegistrationForm;
+import com.spring.foodorder.DTOs.RegistrationUserForm;
 import com.spring.foodorder.Exceptions.InvalidCredentialsException;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;
 import com.spring.foodorder.Services.UserService;
@@ -20,9 +20,9 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegistrationForm registrationForm) {
+    public ResponseEntity<?> register(@RequestBody RegistrationUserForm registrationUserForm) {
         try {
-            userService.register(registrationForm);
+            userService.register(registrationUserForm);
             return ResponseEntity.ok("User registered successfully");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Registration failed: " + e.getMessage());

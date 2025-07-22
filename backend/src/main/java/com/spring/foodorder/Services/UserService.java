@@ -2,15 +2,13 @@ package com.spring.foodorder.Services;
 
 import com.spring.foodorder.DTOs.LoginForm;
 import com.spring.foodorder.DTOs.LoginResponse;
-import com.spring.foodorder.DTOs.RegistrationForm;
-import com.spring.foodorder.Enums.FoodType;
+import com.spring.foodorder.DTOs.RegistrationUserForm;
 import com.spring.foodorder.Enums.UserRole;
+import com.spring.foodorder.Exceptions.ResourceAlreadyExistsException;
 import com.spring.foodorder.Exceptions.InvalidCredentialsException;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;
 import com.spring.foodorder.Models.Address;
-import com.spring.foodorder.Models.Restaurant;
 import com.spring.foodorder.Models.User;
-import com.spring.foodorder.Repositories.RestaurantRepository;
 import com.spring.foodorder.Repositories.UserRepository;
 import com.spring.foodorder.Security.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -33,57 +30,32 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private RestaurantRepository restaurantRepository;
-
-    @Autowired
-    private CloudinaryService cloudinaryService;
-
     // Method to register a new user
-    public void register(RegistrationForm registrationForm) {
-        Optional<User> user = userRepository.findByEmail(registrationForm.getEmail());
+    public void register(RegistrationUserForm registrationUserForm) {
+        Optional<User> user = userRepository.findByEmail(registrationUserForm.getEmail());
         if (user.isPresent()) {
-            throw new IllegalArgumentException("User with this email already exists");
+            throw new ResourceAlreadyExistsException("User with this email already exists.");
         }
 
         // Save new user
         User newUser = new User();
-        newUser.setEmail(registrationForm.getEmail());
-        newUser.setPassword(passwordEncoder.encode(registrationForm.getPassword()));
-        newUser.setName(registrationForm.getName());
-        newUser.setPhoneNumber(registrationForm.getPhoneNumber());
-        newUser.setCitizenId(registrationForm.getCitizenId());
-        newUser.setAddress(new Address(registrationForm.getAddress(),
-                registrationForm.getDistrict(),
-                registrationForm.getCity()));
-        newUser.setDob(registrationForm.getDob());
-        newUser.setGender(registrationForm.getGender());
-        newUser.setRole(registrationForm.getRole());
-        userRepository.save(newUser);
-
-        // If the user is a restaurant owner, create a restaurant entry
-        if (registrationForm.getRole() == UserRole.RESTAURANT_OWNER) {
-            Restaurant restaurant = new Restaurant();
-            restaurant.setOwner(newUser);
-            restaurant.setRestaurantName(registrationForm.getRestaurantName());
-            restaurant.setContactNumber(registrationForm.getContactNumber());
-            restaurant.setContactEmail(registrationForm.getContactEmail());
-            restaurant.setDescription(registrationForm.getDescription());
-            restaurant.setLocation(new Address(registrationForm.getLocationAddress(),
-                    registrationForm.getLocationDistrict(),
-                    registrationForm.getLocationCity()));
-            restaurant.setOperatingHours(registrationForm.getOperatingHours());
-            restaurant.setCuisineTypes(registrationForm.getCuisineTypes().stream()
-                    .map(FoodType::fromVietnameseName).collect(Collectors.toList()));
-
-            // Handle image upload if provided
-            if (registrationForm.getRestaurantImage() != null && !registrationForm.getRestaurantImage().isEmpty()) {
-                String imageUrl = cloudinaryService.uploadImage(registrationForm.getRestaurantImage(),
-                        registrationForm.getRestaurantName());
-                restaurant.setImgUrl(imageUrl);
-            }
-            restaurantRepository.save(restaurant);
+        newUser.setEmail(registrationUserForm.getEmail());
+        newUser.setPassword(passwordEncoder.encode(registrationUserForm.getPassword()));
+        newUser.setName(registrationUserForm.getName());
+        newUser.setPhoneNumber(registrationUserForm.getPhoneNumber());
+        newUser.setCitizenId(registrationUserForm.getCitizenId());
+        newUser.setAddress(new Address(registrationUserForm.getAddress(),
+                registrationUserForm.getDistrict(),
+                registrationUserForm.getCity()));
+        newUser.setDob(registrationUserForm.getDob());
+        newUser.setGender(registrationUserForm.getGender());
+        if (registrationUserForm.getRole() == null) {
+            newUser.setRole(UserRole.CUSTOMER);
+        } else {
+            newUser.setRole(registrationUserForm.getRole());
         }
+        newUser.setRole(registrationUserForm.getRole());
+        userRepository.save(newUser);
     }
 
     // Method to log in a user

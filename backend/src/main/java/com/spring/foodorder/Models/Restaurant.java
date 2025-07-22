@@ -22,8 +22,8 @@ public class Restaurant {
     @Id
     private String id;
 
-    @Field("owner")
-    private User owner;
+    @Field("owner_id")
+    private String ownerId;
 
     @Field("name")
     private String restaurantName;

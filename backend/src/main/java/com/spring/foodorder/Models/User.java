@@ -57,6 +57,9 @@ public class User implements UserDetails {
     @Field("role")
     protected UserRole role;
 
+    @Field("restaurant_id")
+    private String restaurantId;
+
     @Field("created_at")
     private final LocalDate createdAt = LocalDate.now();
 
