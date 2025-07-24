@@ -5,9 +5,10 @@ import com.spring.foodorder.Enums.FoodType;
 import com.spring.foodorder.Enums.UserRole;
 import com.spring.foodorder.Exceptions.ResourceAlreadyExistsException;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;
-import com.spring.foodorder.Models.Address;
-import com.spring.foodorder.Models.Restaurant;
-import com.spring.foodorder.Models.User;
+import com.spring.foodorder.Objects.Address;
+import com.spring.foodorder.Documents.Restaurant;
+import com.spring.foodorder.Documents.User;
+import com.spring.foodorder.Objects.Rating;
 import com.spring.foodorder.Repositories.RestaurantRepository;
 import com.spring.foodorder.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,11 @@ public class RestaurantService{
         newRestaurant.setLocation(new Address(registrationRestaurantForm.getLocationAddress(),
                 registrationRestaurantForm.getLocationDistrict(),
                 registrationRestaurantForm.getLocationCity()));
+        newRestaurant.setRating(new Rating(0, 0)); // Initialize rating with zero count and total
+
+        newRestaurant.setMaxPrice(0);
+        newRestaurant.setMinPrice(0);
+        newRestaurant.setAvgPrice(0);
 
         // Handle image upload if provided
         if (registrationRestaurantForm.getRestaurantImage() != null

@@ -4,10 +4,13 @@ import com.spring.foodorder.DTOs.FoodItemDTO;
 import com.spring.foodorder.Enums.FoodType;
 import com.spring.foodorder.Exceptions.ResourceAlreadyExistsException;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;
-import com.spring.foodorder.Models.FoodItem;
-import com.spring.foodorder.Models.Restaurant;
-import com.spring.foodorder.Models.User;
+import com.spring.foodorder.Documents.FoodItem;
+import com.spring.foodorder.Documents.Restaurant;
+import com.spring.foodorder.Documents.User;
+import com.spring.foodorder.Objects.Rating;
+import com.spring.foodorder.Objects.SizeToPrice;
 import com.spring.foodorder.Repositories.FoodRepository;
+import com.spring.foodorder.Repositories.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,9 @@ import java.util.stream.Collectors;
 public class FoodService {
     @Autowired
     private FoodRepository foodRepository;
+
+    @Autowired
+    private RestaurantRepository restaurantRepository;
 
     @Autowired
     private RestaurantService restaurantService;
@@ -38,10 +44,26 @@ public class FoodService {
         FoodItem newFoodItem = new FoodItem();
         newFoodItem.setRestaurantId(restaurant.getId());
         newFoodItem.setName(foodItem.getName());
-        newFoodItem.setPrice(foodItem.getPrice());
+
+        // Set price
+        if (foodItem.getSizeToPrices().size() == 0) {
+            throw new IllegalArgumentException("Food item must have at least one size and price.");
+        }
+        newFoodItem.setSizeToPrices(foodItem.getSizeToPrices());
+        double minPrice = foodItem.getSizeToPrices()
+                .stream().mapToDouble(SizeToPrice::getPrice).min().orElse(0.0);
+        newFoodItem.setMinPrice(minPrice);
+
+        // Save price of retaurant
+        restaurant.setMinPrice(Math.min(restaurant.getMinPrice(), minPrice));
+        restaurant.setMaxPrice(Math.max(restaurant.getMaxPrice(), minPrice));
+        restaurant.setAvgPrice((restaurant.getMaxPrice() + restaurant.getMinPrice()) / 2);
+        restaurantRepository.save(restaurant);
+
         newFoodItem.setDescription(foodItem.getDescription());
         newFoodItem.setCuisineTypes(foodItem.getCuisineTypes()
                 .stream().map(FoodType::fromVietnameseName).collect(Collectors.toList()));
+        newFoodItem.setRating(new Rating(0, 0)); // Initialize rating with zero count and total
         foodRepository.save(newFoodItem);
     }
 
