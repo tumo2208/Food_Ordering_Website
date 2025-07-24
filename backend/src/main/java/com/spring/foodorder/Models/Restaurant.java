@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -18,11 +20,15 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@CompoundIndexes({
+        @CompoundIndex(name = "name_desc_text", def = "{'restaurant_name': 'text', 'description': 'text'}")
+})
 public class Restaurant {
     @Id
     private String id;
 
     @Field("owner_id")
+    @Indexed
     private String ownerId;
 
     @Field("name")
@@ -48,6 +54,7 @@ public class Restaurant {
     private Rating rating;
 
     @Field("cuisine_types")
+    @Indexed
     private List<FoodType> cuisineTypes;
 
     @Field("img_url")
