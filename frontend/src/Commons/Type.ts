@@ -57,3 +57,21 @@ export interface CuisineFilter {
     id: number;
     name: string;
 }
+
+export interface LoginData {
+    email: string;
+    password: string;
+}
+
+export interface RegistrationUserData {
+    email: string;
+    password: string;
+    name: string;
+    phoneNumber: string;
+    address: string;
+    district: string;
+    city: string;
+    citizenId: string;
+    dob: string;
+    gender: "MALE" | "FEMALE" | "OTHER";
+}

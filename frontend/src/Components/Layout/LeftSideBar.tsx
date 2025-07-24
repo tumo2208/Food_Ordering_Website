@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {BanknotesIcon, ClockIcon, Cog6ToothIcon, HomeIcon, XMarkIcon} from "@heroicons/react/24/solid";
 import {ChatBubbleLeftIcon} from "@heroicons/react/24/solid";
 
@@ -29,31 +29,47 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
 
                 {/* Navigation Links */}
                 <nav className='space-y-6'>
-                    <Link to="/" className="flex mb-8 items-center gap-3 text-gray-500 hover:text-primary">
+                    <NavLink to="/" className={({ isActive }) =>
+                        `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
+                    }>
                         <HomeIcon className="h-6 w-6"/>
                         <span>Dashboard</span>
-                    </Link>
-                    <Link to="/restaurants" className="flex mb-8  items-center gap-3 text-gray-500 hover:text-primary">
+                    </NavLink>
+
+                    <NavLink to="/restaurants" className={({ isActive }) =>
+                        `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
+                    }>
                         <BanknotesIcon className="h-6 w-6"/>
                         <span>Restaurants</span>
-                    </Link>
-                    <Link to="/messages" className="flex mb-8  items-center gap-3 text-gray-500 hover:text-primary">
+                    </NavLink>
+
+                    <NavLink to="/messages" className={({ isActive }) =>
+                        `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
+                    }>
                         <ChatBubbleLeftIcon className="h-6 w-6"/>
                         <span>Message</span>
-                    </Link>
-                    <Link to="/history" className="flex mb-8  items-center gap-3 text-gray-500 hover:text-primary">
+                    </NavLink>
+
+                    <NavLink to="/history" className={({ isActive }) =>
+                        `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
+                    }>
                         <ClockIcon className="h-6 w-6"/>
                         <span>Order History</span>
-                    </Link>
+                    </NavLink>
 
-                    <Link to="/bills" className="flex mb-8  items-center gap-3 text-gray-500 hover:text-primary">
+                    <NavLink to="/bills" className={({ isActive }) =>
+                        `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
+                    }>
                         <BanknotesIcon className="h-6 w-6"/>
                         <span>Bills</span>
-                    </Link>
-                    <Link to="/settings" className="flex mb-8  items-center gap-3 text-gray-500 hover:text-primary">
+                    </NavLink>
+
+                    <NavLink to="/settings" className={({ isActive }) =>
+                        `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
+                    }>
                         <Cog6ToothIcon className="h-6 w-6"/>
                         <span>Setting</span>
-                    </Link>
+                    </NavLink>
                 </nav>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import type {MenuCategory, Restaurant, SearchOptions} from "./Type.ts";
+import type {LoginData, MenuCategory, RegistrationUserData, Restaurant, SearchOptions} from "./Type.ts";
 import {menuCategories, restaurantData, smartSearch} from "./DataDummy.ts";
 
 export const searchFunction = async (query:SearchOptions) => {
@@ -13,3 +13,63 @@ export const getRestaurantById = (id: number): Restaurant | undefined => {
 export const getMenuForRestaurant = (id: number): MenuCategory[] => {
     return menuCategories[id] || [];
 };
+
+import axios from 'axios';
+
+export const api = axios.create({
+    baseURL: 'http://localhost:3001',
+});
+
+function getHeaders() {
+    const token = localStorage.getItem('token');
+    return {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+    }
+}
+
+export async function register(registrationData:RegistrationUserData) {
+    try {
+        return await api.post('/auth/register', registrationData);
+    } catch (error) {
+        console.error('Registration error:', error);
+        throw error;
+    }
+}
+
+export async function login(loginData:LoginData) {
+    try {
+        return await api.post('/auth/login', loginData);
+    } catch (error) {
+        console.error('Login error:', error);
+        throw error;
+    }
+}
+
+export function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('user');
+}
+
+export function isAuthenticated() {
+    const token = localStorage.getItem('token');
+    return !!token;
+}
+
+export function isRestaurantOwner() {
+    const role = localStorage.getItem('role');
+    return role === 'RESTAURANT_OWNER';
+}
+
+export async function getUserProfile() {
+    try {
+        const response = await api.get('/user/profile', {
+            headers: getHeaders(),
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Get user profile error:', error);
+        throw error;
+    }
+}
