@@ -1,11 +1,12 @@
-package com.spring.foodorder.Models;
+package com.spring.foodorder.Documents;
 
 import com.spring.foodorder.Enums.FoodType;
+import com.spring.foodorder.Objects.Rating;
+import com.spring.foodorder.Objects.SizeToPrice;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
@@ -15,43 +16,30 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
-@Document(collection = "restaurants")
+@Document(collection = "food_items")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @CompoundIndexes({
-        @CompoundIndex(name = "name_desc_text", def = "{'restaurant_name': 'text', 'description': 'text'}")
+        @CompoundIndex(name = "restaurant_name_unique", def = "{'name': 1, 'restaurant_id': 1}", unique = true),
+        @CompoundIndex(name = "name_desc_text", def = "{'name': 'text', 'description': 'text'}")
 })
-public class Restaurant {
+public class FoodItem {
     @Id
     private String id;
 
-    @Field("owner_id")
-    @Indexed
-    private String ownerId;
-
     @Field("name")
-    private String restaurantName;
+    private String name;
 
-    @Field("contact_number")
-    private String contactNumber;
+    @Field("min_price")
+    private double minPrice;
 
-    @Field("contact_email")
-    @Indexed(unique = true)
-    private String contactEmail;
-
-    @Field("location")
-    private Address location;
+    @Field("size_to_prices")
+    private List<SizeToPrice> sizeToPrices;
 
     @Field("description")
     private String description;
-
-    @Field("operating_hours")
-    private String operatingHours;
-
-    @Field("rating")
-    private Rating rating;
 
     @Field("cuisine_types")
     @Indexed
@@ -59,4 +47,10 @@ public class Restaurant {
 
     @Field("img_url")
     private String imgUrl;
+
+    @Field("rating")
+    private Rating rating;
+
+    @Field("restaurant_id")
+    private String restaurantId;
 }

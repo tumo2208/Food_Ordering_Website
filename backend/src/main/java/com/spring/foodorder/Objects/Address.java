@@ -1,4 +1,4 @@
-package com.spring.foodorder.Models;
+package com.spring.foodorder.Objects;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

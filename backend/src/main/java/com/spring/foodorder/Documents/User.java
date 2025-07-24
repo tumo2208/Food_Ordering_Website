@@ -1,7 +1,8 @@
-package com.spring.foodorder.Models;
+package com.spring.foodorder.Documents;
 
 import com.spring.foodorder.Enums.Gender;
 import com.spring.foodorder.Enums.UserRole;
+import com.spring.foodorder.Objects.Address;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

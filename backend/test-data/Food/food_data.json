@@ -1,176 +1,286 @@
 [
   {
-    "name": "Sushi Cá Hồi",
-    "price": 89.0,
-    "cuisineTypes": ["Nhật Bản", "Hải sản", "Cơm"],
-    "description": "Miếng sushi tươi ngon với cá hồi Nauy, cơm giấm chuẩn Nhật."
-  },
-  {
-    "name": "Sashimi Thập Cẩm",
-    "price": 159.0,
+    "name": "Sushi cá hồi",
+    "sizeToPrices": [
+      { "size": "M", "price": 100000 },
+      { "size": "L", "price": 150000 }
+    ],
     "cuisineTypes": ["Nhật Bản", "Hải sản"],
-    "description": "Phần sashimi gồm cá ngừ, cá hồi, bạch tuộc, ăn kèm wasabi và nước tương."
+    "description": "Sushi cá hồi tươi ngon",
+    "image": null
   },
   {
-    "name": "Cơm Lươn Nhật (Unagi Don)",
-    "price": 125.0,
-    "cuisineTypes": ["Nhật Bản", "Cơm", "Món ăn từ thịt"],
-    "description": "Lươn nướng sốt tare ăn cùng cơm Nhật thơm dẻo."
+    "name": "Sushi cá ngừ",
+    "sizeToPrices": [
+      { "size": "M", "price": 90000 },
+      { "size": "L", "price": 140000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Hải sản"],
+    "description": "Sushi cá ngừ đại dương",
+    "image": null
   },
   {
-    "name": "Tempura Tổng Hợp",
-    "price": 95.0,
-    "cuisineTypes": ["Nhật Bản", "Hải sản", "Món ăn từ thịt"],
-    "description": "Tôm, rau củ tẩm bột chiên giòn, ăn kèm nước chấm đặc biệt."
+    "name": "Sashimi tổng hợp",
+    "sizeToPrices": [
+      { "size": "L", "price": 250000 },
+      { "size": "XL", "price": 350000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Hải sản"],
+    "description": "Sashimi gồm cá hồi, cá ngừ, bạch tuộc",
+    "image": null
   },
   {
-    "name": "Mì Ramen Thịt Heo",
-    "price": 105.0,
-    "cuisineTypes": ["Nhật Bản", "Bún/Phở/Miến", "Món ăn từ thịt"],
-    "description": "Nước dùng hầm xương chuẩn vị Nhật, sợi mì dai, thịt heo nướng mềm."
+    "name": "Tempura tôm",
+    "sizeToPrices": [
+      { "size": "M", "price": 80000 },
+      { "size": "L", "price": 120000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Hải sản", "Đồ ăn nhanh"],
+    "description": "Tôm chiên giòn kiểu Nhật",
+    "image": null
   },
   {
-    "name": "Takoyaki Bạch Tuộc",
-    "price": 65.0,
-    "cuisineTypes": ["Nhật Bản", "Đồ ăn nhanh", "Hải sản"],
-    "description": "Viên bánh nhân bạch tuộc nóng hổi, rưới sốt mayonnaise và cá bào."
-  },
-  {
-    "name": "Bánh Mochi Trà Xanh",
-    "price": 45.0,
-    "cuisineTypes": ["Nhật Bản", "Tráng miệng", "Bánh ngọt"],
-    "description": "Mochi dẻo nhân kem trà xanh, thơm mát và ngọt dịu."
-  },
-  {
-    "name": "Matcha Latte",
-    "price": 49.0,
-    "cuisineTypes": ["Nhật Bản", "Đồ uống"],
-    "description": "Thức uống mát lạnh, thơm vị trà xanh Nhật Bản."
-  },
-  {
-    "name": "Lẩu Shabu Shabu",
-    "price": 189.0,
-    "cuisineTypes": ["Nhật Bản", "Lẩu & Nướng", "Món ăn từ thịt"],
-    "description": "Lẩu nhúng kiểu Nhật với bò Mỹ, rau củ và nước dùng thanh ngọt."
-  },
-  {
-    "name": "Gyoza Chiên",
-    "price": 69.0,
-    "cuisineTypes": ["Nhật Bản", "Đồ ăn nhanh", "Món ăn từ thịt"],
-    "description": "Bánh xếp nhân thịt chiên giòn, chấm sốt gừng đậm đà."
-  },
-  {
-    "name": "Nigiri Tôm Nướng",
-    "price": 75.0,
+    "name": "Cơm cuộn lươn",
+    "sizeToPrices": [
+      { "size": "M", "price": 95000 },
+      { "size": "L", "price": 140000 }
+    ],
     "cuisineTypes": ["Nhật Bản", "Cơm", "Hải sản"],
-    "description": "Tôm nướng sốt mayonnaise trên cơm giấm chuẩn vị."
+    "description": "Cơm cuộn lươn nướng sốt teriyaki",
+    "image": null
   },
   {
-    "name": "Sushi Cuộn Thanh Cua",
-    "price": 68.0,
-    "cuisineTypes": ["Nhật Bản", "Cơm", "Hải sản"],
-    "description": "Cuộn sushi với thanh cua, dưa leo và trứng cuộn."
-  },
-  {
-    "name": "Bánh Xèo Nhật (Okonomiyaki)",
-    "price": 98.0,
+    "name": "Takoyaki",
+    "sizeToPrices": [
+      { "size": "M", "price": 60000 },
+      { "size": "L", "price": 90000 }
+    ],
     "cuisineTypes": ["Nhật Bản", "Đồ ăn nhanh"],
-    "description": "Bánh xèo kiểu Nhật với bắp cải, hải sản, sốt đặc trưng."
+    "description": "Bánh bạch tuộc Nhật chiên giòn",
+    "image": null
   },
   {
-    "name": "Trà Đào Nhật",
-    "price": 39.0,
-    "cuisineTypes": ["Nhật Bản", "Đồ uống"],
-    "description": "Trà đào mát lạnh, nhẹ nhàng vị hoa quả Nhật Bản."
+    "name": "Mì Udon bò",
+    "sizeToPrices": [
+      { "size": "L", "price": 110000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Bún/Phở/Miến", "Món ăn từ thịt"],
+    "description": "Mì Udon với thịt bò thái lát",
+    "image": null
   },
   {
-    "name": "Salad Rong Biển",
-    "price": 42.0,
-    "cuisineTypes": ["Nhật Bản", "Món ăn từ thịt", "Tráng miệng"],
-    "description": "Salad thanh mát từ rong biển Wakame, mè rang, sốt mè rang."
+    "name": "Mì ramen trứng",
+    "sizeToPrices": [
+      { "size": "M", "price": 95000 },
+      { "size": "L", "price": 125000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Bún/Phở/Miến"],
+    "description": "Mì ramen nước hầm xương, trứng lòng đào",
+    "image": null
   },
   {
-    "name": "Cơm Cuộn Lươn",
-    "price": 115.0,
+    "name": "Bento cá saba",
+    "sizeToPrices": [
+      { "size": "M", "price": 105000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Cơm", "Hải sản"],
+    "description": "Cá saba nướng ăn kèm cơm trắng và rau",
+    "image": null
+  },
+  {
+    "name": "Bento thịt gà",
+    "sizeToPrices": [
+      { "size": "M", "price": 95000 },
+      { "size": "L", "price": 130000 }
+    ],
     "cuisineTypes": ["Nhật Bản", "Cơm", "Món ăn từ thịt"],
-    "description": "Cuộn cơm lươn nướng sốt tare, thơm mềm khó cưỡng."
+    "description": "Gà chiên giòn sốt teriyaki",
+    "image": null
   },
   {
-    "name": "Súp Miso",
-    "price": 35.0,
-    "cuisineTypes": ["Nhật Bản", "Món ăn từ thịt"],
-    "description": "Súp truyền thống từ đậu tương, rong biển và đậu phụ."
-  },
-  {
-    "name": "Sushi Trứng Cuộn",
-    "price": 59.0,
-    "cuisineTypes": ["Nhật Bản", "Cơm"],
-    "description": "Miếng sushi trứng cuộn tamago nhẹ nhàng, tinh tế."
-  },
-  {
-    "name": "Kem Trà Xanh",
-    "price": 48.0,
-    "cuisineTypes": ["Nhật Bản", "Tráng miệng", "Bánh ngọt"],
-    "description": "Kem mát lạnh vị matcha, ngọt dịu, béo ngậy."
-  },
-  {
-    "name": "Cơm Cá Tuyết Nướng",
-    "price": 135.0,
-    "cuisineTypes": ["Nhật Bản", "Hải sản", "Cơm"],
-    "description": "Cá tuyết nướng sốt miso, ăn kèm cơm trắng."
-  },
-  {
-    "name": "Mì Udon Hải Sản",
-    "price": 108.0,
-    "cuisineTypes": ["Nhật Bản", "Bún/Phở/Miến", "Hải sản"],
-    "description": "Sợi udon dai ngon kết hợp hải sản tươi sống."
-  },
-  {
-    "name": "Yakitori (Thịt Gà Xiên Nướng)",
-    "price": 72.0,
-    "cuisineTypes": ["Nhật Bản", "Món ăn từ thịt", "Nướng"],
-    "description": "Gà xiên nướng sốt tare, đậm đà, thơm lừng."
-  },
-  {
-    "name": "Sushi Cá Ngừ",
-    "price": 85.0,
-    "cuisineTypes": ["Nhật Bản", "Cơm", "Hải sản"],
-    "description": "Sushi cá ngừ đại dương tươi sống, ăn kèm wasabi."
-  },
-  {
-    "name": "Sashimi Cá Trích Ép Trứng",
-    "price": 129.0,
+    "name": "Nigiri cá trích ép trứng",
+    "sizeToPrices": [
+      { "size": "M", "price": 80000 }
+    ],
     "cuisineTypes": ["Nhật Bản", "Hải sản"],
-    "description": "Cá trích ép trứng tươi ngon, cắt lát vừa ăn."
+    "description": "Nigiri với trứng cá ép đẹp mắt",
+    "image": null
   },
   {
-    "name": "Trà Lúa Mạch (Mugicha)",
-    "price": 36.0,
+    "name": "Nigiri tôm",
+    "sizeToPrices": [
+      { "size": "M", "price": 85000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Hải sản"],
+    "description": "Nigiri với tôm tươi hấp",
+    "image": null
+  },
+  {
+    "name": "Gunkan trứng cá hồi",
+    "sizeToPrices": [
+      { "size": "M", "price": 100000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Hải sản"],
+    "description": "Gunkan với trứng cá hồi phủ đầy",
+    "image": null
+  },
+  {
+    "name": "Gunkan thanh cua",
+    "sizeToPrices": [
+      { "size": "M", "price": 85000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Hải sản"],
+    "description": "Gunkan cuộn rong biển với thanh cua",
+    "image": null
+  },
+  {
+    "name": "Sushi trứng cuộn",
+    "sizeToPrices": [
+      { "size": "M", "price": 60000 }
+    ],
+    "cuisineTypes": ["Nhật Bản"],
+    "description": "Trứng cuộn sushi ngọt nhẹ",
+    "image": null
+  },
+  {
+    "name": "Onigiri cá ngừ",
+    "sizeToPrices": [
+      { "size": "M", "price": 55000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Cơm"],
+    "description": "Cơm nắm nhân cá ngừ mayo",
+    "image": null
+  },
+  {
+    "name": "Onigiri mận muối",
+    "sizeToPrices": [
+      { "size": "M", "price": 50000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Cơm"],
+    "description": "Cơm nắm nhân mận muối truyền thống",
+    "image": null
+  },
+  {
+    "name": "Trà xanh Nhật",
+    "sizeToPrices": [
+      { "size": "M", "price": 30000 },
+      { "size": "L", "price": 40000 }
+    ],
     "cuisineTypes": ["Nhật Bản", "Đồ uống"],
-    "description": "Nước lúa mạch rang, không đường, tốt cho sức khỏe."
+    "description": "Trà xanh matcha lạnh giải nhiệt",
+    "image": null
   },
   {
-    "name": "Bánh Dorayaki",
-    "price": 55.0,
-    "cuisineTypes": ["Nhật Bản", "Bánh ngọt", "Tráng miệng"],
-    "description": "Bánh mềm kẹp nhân đậu đỏ truyền thống."
+    "name": "Soda vị đào",
+    "sizeToPrices": [
+      { "size": "M", "price": 35000 },
+      { "size": "L", "price": 45000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Đồ uống"],
+    "description": "Soda trái cây vị đào mát lạnh",
+    "image": null
   },
   {
-    "name": "Kem Đậu Đỏ",
-    "price": 52.0,
+    "name": "Pudding trà xanh",
+    "sizeToPrices": [
+      { "size": "M", "price": 40000 }
+    ],
     "cuisineTypes": ["Nhật Bản", "Tráng miệng"],
-    "description": "Kem lạnh vị đậu đỏ ngọt dịu, thơm béo."
+    "description": "Pudding matcha béo ngậy",
+    "image": null
   },
   {
-    "name": "Trà Sữa Nhật Matcha",
-    "price": 51.0,
+    "name": "Kem mochi",
+    "sizeToPrices": [
+      { "size": "M", "price": 45000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Tráng miệng"],
+    "description": "Mochi lạnh nhân kem nhiều vị",
+    "image": null
+  },
+  {
+    "name": "Bánh dorayaki",
+    "sizeToPrices": [
+      { "size": "M", "price": 40000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Bánh ngọt"],
+    "description": "Bánh rán Nhật nhân đậu đỏ",
+    "image": null
+  },
+  {
+    "name": "Bánh phô mai Nhật",
+    "sizeToPrices": [
+      { "size": "M", "price": 50000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Bánh ngọt"],
+    "description": "Bánh phô mai nướng mềm mịn",
+    "image": null
+  },
+  {
+    "name": "Cơm cà ri Nhật",
+    "sizeToPrices": [
+      { "size": "M", "price": 95000 },
+      { "size": "L", "price": 130000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Cơm", "Món ăn từ thịt"],
+    "description": "Cơm trắng ăn cùng sốt cà ri bò kiểu Nhật",
+    "image": null
+  },
+  {
+    "name": "Lẩu shabu shabu",
+    "sizeToPrices": [
+      { "size": "L", "price": 250000 },
+      { "size": "XL", "price": 320000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Lẩu & Nướng", "Món ăn từ thịt"],
+    "description": "Lẩu nhúng thịt bò thái lát mỏng kiểu Nhật",
+    "image": null
+  },
+  {
+    "name": "Gà Karaage",
+    "sizeToPrices": [
+      { "size": "M", "price": 85000 },
+      { "size": "L", "price": 115000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Đồ ăn nhanh", "Món ăn từ thịt"],
+    "description": "Gà chiên giòn Nhật Bản sốt mayonnaise",
+    "image": null
+  },
+  {
+    "name": "Sushi trứng cá chuồn",
+    "sizeToPrices": [
+      { "size": "M", "price": 90000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Hải sản"],
+    "description": "Sushi với trứng cá chuồn đỏ giòn tan",
+    "image": null
+  },
+  {
+    "name": "Bánh xèo Nhật Bản (Okonomiyaki)",
+    "sizeToPrices": [
+      { "size": "L", "price": 120000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Đồ ăn nhanh", "Món ăn từ thịt"],
+    "description": "Bánh xèo Nhật với cải bắp và thịt xông khói",
+    "image": null
+  },
+  {
+    "name": "Trà sữa Hokkaido",
+    "sizeToPrices": [
+      { "size": "M", "price": 45000 },
+      { "size": "L", "price": 55000 }
+    ],
     "cuisineTypes": ["Nhật Bản", "Đồ uống"],
-    "description": "Trà sữa kết hợp trà xanh matcha thơm mát, ít đường."
+    "description": "Trà sữa kem sữa Hokkaido thơm béo",
+    "image": null
   },
   {
-    "name": "Sushi Cuộn Cá Hồi Phô Mai",
-    "price": 92.0,
-    "cuisineTypes": ["Nhật Bản", "Cơm", "Hải sản"],
-    "description": "Cuộn cá hồi, phô mai béo ngậy, nướng chín mặt trên."
+    "name": "Kem trà xanh mochi",
+    "sizeToPrices": [
+      { "size": "M", "price": 50000 }
+    ],
+    "cuisineTypes": ["Nhật Bản", "Tráng miệng"],
+    "description": "Kem trà xanh cuộn mochi dẻo lạnh",
+    "image": null
   }
 ]
