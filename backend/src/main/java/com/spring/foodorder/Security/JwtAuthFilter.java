@@ -1,6 +1,6 @@
 package com.spring.foodorder.Security;
 
-import com.spring.foodorder.Models.User;
+import com.spring.foodorder.Documents.User;
 import com.spring.foodorder.Services.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

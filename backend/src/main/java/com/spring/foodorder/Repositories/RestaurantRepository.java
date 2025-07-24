@@ -1,7 +1,7 @@
 package com.spring.foodorder.Repositories;
 
 import com.spring.foodorder.Enums.FoodType;
-import com.spring.foodorder.Models.Restaurant;
+import com.spring.foodorder.Documents.Restaurant;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

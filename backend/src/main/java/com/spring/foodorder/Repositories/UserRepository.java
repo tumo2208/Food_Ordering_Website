@@ -1,6 +1,6 @@
 package com.spring.foodorder.Repositories;
 
-import com.spring.foodorder.Models.User;
+import com.spring.foodorder.Documents.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

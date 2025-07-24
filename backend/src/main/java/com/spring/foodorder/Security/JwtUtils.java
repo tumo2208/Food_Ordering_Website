@@ -1,6 +1,6 @@
 package com.spring.foodorder.Security;
 
-import com.spring.foodorder.Models.User;
+import com.spring.foodorder.Documents.User;
 import io.jsonwebtoken.Jwts;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;

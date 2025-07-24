@@ -4,7 +4,7 @@ import com.spring.foodorder.DTOs.FoodItemDTO;
 import com.spring.foodorder.Enums.FoodType;
 import com.spring.foodorder.Exceptions.ResourceAlreadyExistsException;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;
-import com.spring.foodorder.Models.FoodItem;
+import com.spring.foodorder.Documents.FoodItem;
 import com.spring.foodorder.Services.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
