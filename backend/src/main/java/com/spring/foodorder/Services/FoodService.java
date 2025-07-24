@@ -55,7 +55,11 @@ public class FoodService {
         newFoodItem.setMinPrice(minPrice);
 
         // Save price of retaurant
-        restaurant.setMinPrice(Math.min(restaurant.getMinPrice(), minPrice));
+        if (restaurant .getMinPrice() == 0) {
+            restaurant.setMinPrice(minPrice);
+        } else {
+            restaurant.setMinPrice(Math.min(restaurant.getMinPrice(), minPrice));
+        }
         restaurant.setMaxPrice(Math.max(restaurant.getMaxPrice(), minPrice));
         restaurant.setAvgPrice((restaurant.getMaxPrice() + restaurant.getMinPrice()) / 2);
         restaurantRepository.save(restaurant);

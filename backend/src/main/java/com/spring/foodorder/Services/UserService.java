@@ -66,7 +66,7 @@ public class UserService {
             throw new InvalidCredentialsException("Password does not match");
         }
         String token = jwtUtils.generateToken(user);
-        return new LoginResponse(token, user.getRole().name());
+        return new LoginResponse(token, user.getRole().name(), user);
     }
 
     // Method to get the currently logged-in user
