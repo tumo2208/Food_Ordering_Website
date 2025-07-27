@@ -32,6 +32,14 @@ public class RestaurantService{
     @Autowired
     private UserService userService;
 
+    // Method to search restaurants by name or description
+    public List<Restaurant> searchRestaurants(String query) {
+        if (query == null || query.isEmpty()) {
+            return restaurantRepository.findAll();
+        }
+        return restaurantRepository.findByRestaurantNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(query, query);
+    }
+
     // Method to register a restaurant
     public void registerRestaurant(RegistrationRestaurantForm registrationRestaurantForm) {
         User currentUser = userService.getUserProfile();

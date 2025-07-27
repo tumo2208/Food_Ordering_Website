@@ -31,6 +31,17 @@ public class FoodService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CloudinaryService cloudinaryService;
+
+    // Method to search food items by name or description
+    public List<FoodItem> searchFoodItems(String query) {
+        if (query == null || query.isEmpty()) {
+            return foodRepository.findAll();
+        }
+        return foodRepository.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(query, query);
+    }
+
     // Method to add a food item to restaurant menu
     public void addFoodItemToRestaurantMenu(FoodItemDTO foodItem) {
         User currentUser = userService.getUserProfile();
@@ -68,6 +79,15 @@ public class FoodService {
         newFoodItem.setCuisineTypes(foodItem.getCuisineTypes()
                 .stream().map(FoodType::fromVietnameseName).collect(Collectors.toList()));
         newFoodItem.setRating(new Rating(0, 0)); // Initialize rating with zero count and total
+
+        // Handle image upload if provided
+        if (foodItem.getImage() != null
+                && !foodItem.getImage().isEmpty()) {
+            String imageUrl = cloudinaryService.uploadImage(foodItem.getImage(),
+                    foodItem.getName());
+            newFoodItem.setImgUrl(imageUrl);
+        }
+
         foodRepository.save(newFoodItem);
     }
 
