@@ -1,10 +1,10 @@
-import type {LoginData, MenuCategory, RegistrationUserData, Restaurant, SearchOptions} from "./Type.ts";
-import {menuCategories, restaurantData, smartSearch} from "./DataDummy.ts";
+import type {LoginData, MenuCategory, RegistrationUserData, Restaurant} from "./Type.ts";
+import {menuCategories, restaurantData} from "./DataDummy.ts";
 
-export const searchFunction = async (query:SearchOptions) => {
-    const res = smartSearch(query);
-    return Promise.resolve(res);
-}
+// export const searchFunction = async (query:SearchOptions) => {
+//     const res = smartSearch(query);
+//     return Promise.resolve(res);
+// }
 
 export const getRestaurantById = (id: number): Restaurant | undefined => {
     return restaurantData.find(restaurant => restaurant.id === id);
@@ -70,6 +70,18 @@ export async function getUserProfile() {
         return response.data;
     } catch (error) {
         console.error('Get user profile error:', error);
+        throw error;
+    }
+}
+
+export async function searchFunction(query: String) {
+    try {
+        const response = await api.get("/search/search", {
+            params: { query: query }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Search failed: ', error);
         throw error;
     }
 }

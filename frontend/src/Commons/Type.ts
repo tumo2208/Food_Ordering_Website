@@ -1,7 +1,7 @@
-export interface SearchOptions {
-    query: string;
-}
-
+// export interface SearchOptions {
+//     query: string;
+// }
+//
 export interface FoodType {
     id: number;
     name: string;
@@ -74,4 +74,18 @@ export interface RegistrationUserData {
     citizenId: string;
     dob: string;
     gender: "MALE" | "FEMALE" | "OTHER";
+}
+
+export interface User {
+    id: string;
+    email: string;
+    name: string;
+    phoneNumber: string;
+    address: string;
+    district: string;
+    city: string;
+    citizenId: string;
+    dob: string;
+    gender: "MALE" | "FEMALE" | "OTHER";
+    restaurantId?: string;
 }

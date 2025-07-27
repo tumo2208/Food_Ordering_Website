@@ -45,9 +45,10 @@ const SearchBar = () => {
             debounceRef.current = setTimeout(async () => {
                 setIsSearching(true);
                 setShowResults(true);
+                console.log(searchQuery);
 
-                const searchResults = await searchFunction({ query: searchQuery });
-                setResults(searchResults);
+                const searchResults = await searchFunction(searchQuery);
+                setResults(searchResults.results);
                 setIsSearching(false);
             }, 300);
         } else {
