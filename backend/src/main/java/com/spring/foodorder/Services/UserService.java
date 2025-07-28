@@ -3,6 +3,7 @@ package com.spring.foodorder.Services;
 import com.spring.foodorder.DTOs.LoginForm;
 import com.spring.foodorder.DTOs.LoginResponse;
 import com.spring.foodorder.DTOs.RegistrationUserForm;
+import com.spring.foodorder.DTOs.UserDTO;
 import com.spring.foodorder.Enums.UserRole;
 import com.spring.foodorder.Exceptions.ResourceAlreadyExistsException;
 import com.spring.foodorder.Exceptions.InvalidCredentialsException;
@@ -29,6 +30,23 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    // Method to map UserEntity to User DTO
+    public UserDTO fromUser(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setName(user.getName());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPhoneNumber(user.getPhoneNumber());
+        userDTO.setCitizenId(user.getCitizenId());
+        userDTO.setAddress(user.getAddress().getAddress());
+        userDTO.setDistrict(user.getAddress().getDistrict());
+        userDTO.setCity(user.getAddress().getCity());
+        userDTO.setDob(user.getDob());
+        userDTO.setGender(user.getGender());
+        userDTO.setRestaurantId(user.getRestaurantId());
+        userDTO.setCreatedAt(user.getCreatedAt());
+        return userDTO;
+    }
 
     // Method to register a new user
     public void register(RegistrationUserForm registrationUserForm) {
@@ -66,7 +84,7 @@ public class UserService {
             throw new InvalidCredentialsException("Password does not match");
         }
         String token = jwtUtils.generateToken(user);
-        return new LoginResponse(token, user.getRole().name(), user);
+        return new LoginResponse(token, user.getRole().name(), fromUser(user));
     }
 
     // Method to get the currently logged-in user
@@ -75,5 +93,38 @@ public class UserService {
         String email = authentication.getName();
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
+    }
+
+    // Method to update user profile
+    public void updateUserProfile(UserDTO updatedUser) {
+        User currentUser = getUserProfile();
+        if (updatedUser.getEmail() != null && !updatedUser.getEmail().equals(currentUser.getEmail())) {
+            Optional<User> existingUser = userRepository.findByEmail(updatedUser.getEmail());
+            if (existingUser.isPresent()) {
+                throw new ResourceAlreadyExistsException("User with this email already exists.");
+            }
+            currentUser.setEmail(updatedUser.getEmail());
+        }
+        if (updatedUser.getName() != null) {
+            currentUser.setName(updatedUser.getName());
+        }
+        if (updatedUser.getPhoneNumber() != null) {
+            currentUser.setPhoneNumber(updatedUser.getPhoneNumber());
+        }
+        if (updatedUser.getCitizenId() != null) {
+            currentUser.setCitizenId(updatedUser.getCitizenId());
+        }
+
+        currentUser.setAddress(new Address(updatedUser.getAddress(),
+                updatedUser.getDistrict(),
+                updatedUser.getCity()));
+
+        if (updatedUser.getDob() != null) {
+            currentUser.setDob(updatedUser.getDob());
+        }
+        if (updatedUser.getGender() != null) {
+            currentUser.setGender(updatedUser.getGender());
+        }
+        userRepository.save(currentUser);
     }
 }
