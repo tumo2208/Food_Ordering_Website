@@ -38,7 +38,7 @@ const ProfileEdit = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await updateUserProfile(user);
+            await updateUserProfile(userClone);
             // localStorage.setItem("user", JSON.stringify(user));
             setUser(userClone);
             navigate("/profile");

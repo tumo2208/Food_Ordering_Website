@@ -15,6 +15,7 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
     const [loginState, setLoginState] = useState(false);
     const [restaurantOwner, setRestaurantOwner] = useState(false);
     const { user } = useUser();
+    const [showMyRestaurantOption, setShowMyRestaurantOption] = useState(false);
 
     useEffect(() => {
         const authenticated = isAuthenticated();
@@ -87,13 +88,45 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
                         </NavLink>
                     )}
 
-                    {(loginState && restaurantOwner) && (
-                        <NavLink to={`/restaurants/${user.restaurantId}`} className={({isActive}) =>
-                            `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
-                        }>
-                            <ChartBarIcon className="h-6 w-6"/>
-                            <span>Quản lý nhà hàng</span>
-                        </NavLink>
+                    {loginState && restaurantOwner && (
+                        <div className="mb-8">
+                            <button
+                                type="button"
+                                className="flex items-center gap-3 text-gray-500 hover:text-primary w-full"
+                                onClick={() => setShowMyRestaurantOption((prev) => !prev)}
+                            >
+                                <ChartBarIcon className="h-6 w-6" />
+                                <span>Quản lý nhà hàng</span>
+                                <svg
+                                    className={`w-4 h-4 ml-auto transition-transform ${showMyRestaurantOption ? "rotate-180" : ""}`}
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            {showMyRestaurantOption && (
+                                <div className="ml-8 flex flex-col gap-2">
+                                    <NavLink
+                                        to={`/restaurants/${user.restaurantId}/revenue`}
+                                        className={({ isActive }) =>
+                                            `flex mt-5 items-center ${isActive ? "text-primary" : "text-gray-500 hover:text-primary"}`
+                                        }
+                                    >
+                                        <span>Doanh thu</span>
+                                    </NavLink>
+                                    <NavLink
+                                        to={`/restaurants/${user.restaurantId}/menu`}
+                                        className={({ isActive }) =>
+                                            `flex mt-3 items-center ${isActive ? "text-primary" : "text-gray-500 hover:text-primary"}`
+                                        }
+                                    >
+                                        <span>Thực đơn</span>
+                                    </NavLink>
+                                </div>
+                            )}
+                        </div>
                     )}
 
                     {/*<NavLink to="/bills" className={({isActive}) =>*/}

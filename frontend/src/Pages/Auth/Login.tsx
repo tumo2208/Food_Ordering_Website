@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import type {LoginData} from "../../Commons/Type.ts";
 import {login} from "../../Commons/ApiFunction.ts";
 import Loading from "../../Components/Loading/Loading.tsx";
+import {useUser} from "../../Context/User/UserContext.tsx";
 
 const Login = () => {
     const navigate = useNavigate();
+
+    const {setUser} = useUser();
 
     const [formData, setFormData] = useState<LoginData>({
         email: "",
@@ -32,7 +35,8 @@ const Login = () => {
             if (response.status === 200) {
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("role", response.data.role);
-                localStorage.setItem("user", JSON.stringify(response.data.user));
+                // localStorage.setItem("user", JSON.stringify(response.data.user));
+                setUser(response.data.user);
                 navigate("/");
             }
         } catch (error) {
