@@ -1,9 +1,8 @@
 import {NavLink, useNavigate} from "react-router-dom";
-import {BanknotesIcon, ClockIcon, Cog6ToothIcon, HomeIcon, XMarkIcon} from "@heroicons/react/24/solid";
-import {ChatBubbleLeftIcon} from "@heroicons/react/24/solid";
+import {BanknotesIcon, ChartBarIcon, ClockIcon, Cog6ToothIcon, HomeIcon, XMarkIcon} from "@heroicons/react/24/solid";
 import {useEffect, useState} from "react";
 import {isAuthenticated, isRestaurantOwner, logout} from "../../Commons/ApiFunction.ts";
-import type {User} from "../../Commons/Type.ts";
+import { useUser } from '../../Context/User/UserContext.tsx';
 import {Menu} from "@headlessui/react";
 
 interface SideBarProps {
@@ -15,64 +14,22 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
     const navigate = useNavigate();
     const [loginState, setLoginState] = useState(false);
     const [restaurantOwner, setRestaurantOwner] = useState(false);
-    const [user, setUser] = useState<User>({
-        id: "",
-        email: "",
-        name: "",
-        phoneNumber: "",
-        address: "",
-        district: "",
-        city: "",
-        citizenId: "",
-        dob: "",
-        gender: "OTHER",
-        restaurantId: "",
-    })
+    const { user } = useUser();
 
     useEffect(() => {
         const authenticated = isAuthenticated();
         setRestaurantOwner(isRestaurantOwner());
         setLoginState(authenticated);
-
-        if (authenticated) {
-            const user = JSON.parse(localStorage.getItem("user") || "{}");
-            setUser(user);
-        } else {
-            setUser({
-                id: "",
-                email: "",
-                name: "",
-                phoneNumber: "",
-                address: "",
-                district: "",
-                city: "",
-                citizenId: "",
-                dob: "",
-                gender: "OTHER",
-                restaurantId: "",
-            });
-        }
-    }, []);
+        console.log("User: ", user);
+    }, [user]);
 
     const handleLogout = async () => {
         const confirmLogout = window.confirm("Are you sure you want to logout?");
         if (confirmLogout) {
             logout();
+            console.log("Logout: ", user);
             setLoginState(false);
             setRestaurantOwner(false);
-            setUser({
-                id: "",
-                email: "",
-                name: "",
-                phoneNumber: "",
-                address: "",
-                district: "",
-                city: "",
-                citizenId: "",
-                dob: "",
-                gender: "OTHER",
-                restaurantId: "",
-            });
             setTimeout(() => {
                 navigate('/');
             }, 500);
@@ -104,42 +61,53 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
                         `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
                     }>
                         <HomeIcon className="h-6 w-6"/>
-                        <span>Dashboard</span>
+                        <span>Trang chủ</span>
                     </NavLink>
 
                     <NavLink to="/restaurants" className={({isActive}) =>
                         `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
                     }>
                         <BanknotesIcon className="h-6 w-6"/>
-                        <span>Restaurants</span>
+                        <span>Nhà hàng</span>
                     </NavLink>
 
-                    <NavLink to="/messages" className={({isActive}) =>
-                        `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
-                    }>
-                        <ChatBubbleLeftIcon className="h-6 w-6"/>
-                        <span>Message</span>
-                    </NavLink>
+                    {/*<NavLink to="/messages" className={({isActive}) =>*/}
+                    {/*    `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`*/}
+                    {/*}>*/}
+                    {/*    <ChatBubbleLeftIcon className="h-6 w-6"/>*/}
+                    {/*    <span>Message</span>*/}
+                    {/*</NavLink>*/}
 
-                    <NavLink to="/history" className={({isActive}) =>
-                        `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
-                    }>
-                        <ClockIcon className="h-6 w-6"/>
-                        <span>Order History</span>
-                    </NavLink>
+                    {(loginState && !restaurantOwner) && (
+                        <NavLink to="/history" className={({isActive}) =>
+                            `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
+                        }>
+                            <ClockIcon className="h-6 w-6"/>
+                            <span>Lịch sử đơn hàng</span>
+                        </NavLink>
+                    )}
 
-                    <NavLink to="/bills" className={({isActive}) =>
-                        `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
-                    }>
-                        <BanknotesIcon className="h-6 w-6"/>
-                        <span>Bills</span>
-                    </NavLink>
+                    {(loginState && restaurantOwner) && (
+                        <NavLink to={`/restaurants/${user.restaurantId}`} className={({isActive}) =>
+                            `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
+                        }>
+                            <ChartBarIcon className="h-6 w-6"/>
+                            <span>Quản lý nhà hàng</span>
+                        </NavLink>
+                    )}
+
+                    {/*<NavLink to="/bills" className={({isActive}) =>*/}
+                    {/*    `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`*/}
+                    {/*}>*/}
+                    {/*    <BanknotesIcon className="h-6 w-6"/>*/}
+                    {/*    <span>Bills</span>*/}
+                    {/*</NavLink>*/}
 
                     <NavLink to="/settings" className={({isActive}) =>
                         `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
                     }>
                         <Cog6ToothIcon className="h-6 w-6"/>
-                        <span>Setting</span>
+                        <span>Cài đặt</span>
                     </NavLink>
                 </nav>
             </div>
@@ -156,29 +124,16 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
                         </Menu.Button>
                         <Menu.Items
                             className="absolute bottom-full mb-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                            {!restaurantOwner ? (
-                                <Menu.Item>
-                                    {() => (
-                                        <NavLink
-                                            to="/profile"
-                                            className={`block px-4 py-2 text-sm`}
-                                        >
-                                            Thông tin cá nhân
-                                        </NavLink>
-                                    )}
-                                </Menu.Item>
-                            ) : (
-                                <Menu.Item>
-                                    {() => (
-                                        <NavLink
-                                            to="/profile"
-                                            className={`block px-4 py-2 text-sm`}
-                                        >
-                                            Quản lý nhà hàng
-                                        </NavLink>
-                                    )}
-                                </Menu.Item>
-                            )}
+                            <Menu.Item>
+                                {() => (
+                                    <NavLink
+                                        to="/profile"
+                                        className={`block px-4 py-2 text-sm`}
+                                    >
+                                        Thông tin cá nhân
+                                    </NavLink>
+                                )}
+                            </Menu.Item>
                             <Menu.Item>
                                 {() => (
                                     <button

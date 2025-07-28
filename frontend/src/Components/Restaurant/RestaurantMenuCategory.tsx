@@ -1,8 +1,8 @@
 import type { MenuCategory } from "../../Commons/Type";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import Rating from "./Rating";
-import { useAppDispatch } from "../../Store/hooks";
-import { addItem } from "../../Store/feature/cart";
+import { useAppDispatch } from "../../Context/Store/hooks.ts";
+import { addItem } from "../../Context/Store/feature/cart";
 import {PlusIcon} from "@heroicons/react/24/solid";
 
 interface RestaurantMenuCategory extends MenuCategory{

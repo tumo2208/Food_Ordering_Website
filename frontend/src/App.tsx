@@ -8,6 +8,8 @@ import Checkout from "./Pages/Checkout/Checkout.tsx";
 import OrderTracking from "./Pages/OrderTracking/OrderTracking.tsx";
 import Login from "./Pages/Auth/Login.tsx";
 import Register from "./Pages/Auth/Register.tsx";
+import Profile from "./Pages/Profile/Profile.tsx";
+import ProfileEdit from "./Pages/Profile/ProfileEdit.tsx";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
               <Route path="/restaurants/:id" element={<Layout><Restaurant /></Layout>} />
               <Route path="/checkout" element={<Layout><Checkout /></Layout>} />
               <Route path="/order-track/:orderId" element={<Layout><OrderTracking /></Layout>} />
+              <Route path={"/profile"} element={<Layout><Profile/></Layout>} />
+              <Route path={"/profile/edit"} element={<Layout><ProfileEdit/></Layout>} />
               <Route path="/cart" element={<RightSideBar />} />
           </Routes>
       </BrowserRouter>

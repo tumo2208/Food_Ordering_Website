@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../Store/hooks";
+import { useAppDispatch, useAppSelector } from "../../Context/Store/hooks.ts";
 import {
     addItem,
     clearCart,
@@ -7,7 +7,7 @@ import {
     selectActiveCartIndex,
     selectCarts,
     setActiveCart,
-} from "../../Store/feature/cart";
+} from "../../Context/Store/feature/cart";
 
 const Cart = () => {
     const navigate = useNavigate();

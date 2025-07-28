@@ -3,6 +3,7 @@ import LeftSideBar from './LeftSideBar.tsx';
 import RightSideBar from './RightSideBar';
 import Header from "./Header.tsx";
 import {Bars3Icon} from "@heroicons/react/24/solid";
+import { useLocation } from 'react-router-dom';
 
 
 interface LayoutProps {
@@ -10,7 +11,9 @@ interface LayoutProps {
 }
 
 const Layout = ({children}:LayoutProps) => {
+    const location = useLocation();
     const [isLeftSideBarOpen, setIsLeftSideBarOpen] = useState(false);
+
     return (
         <div className="flex h-screen overflow-hidden relative">
 
@@ -37,7 +40,7 @@ const Layout = ({children}:LayoutProps) => {
 
                 {/* Main Content */}
                 <main className="p-3 sm:p-4 md:p-5 w-full">
-                    <Header/>
+                    {location.pathname !== '/profile' && <Header />}
                     {children}
                 </main>
             </div>

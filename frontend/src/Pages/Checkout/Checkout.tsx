@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Address from "../../Components/Address/Address.tsx";
-import { useAppDispatch, useAppSelector } from "../../Store/hooks";
-import { clearCart, selectActiveCartIndex, selectCarts } from "../../Store/feature/cart";
+import { useAppDispatch, useAppSelector } from "../../Context/Store/hooks.ts";
+import { clearCart, selectActiveCartIndex, selectCarts } from "../../Context/Store/feature/cart";
 
 const serviceCharge = 5.00;
 const deliveryFee = 2.50;

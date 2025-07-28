@@ -231,7 +231,7 @@ const Register = () => {
                         </select>
                     </div>
                     <div>
-                        <label className="block mb-1 font-medium">District</label>
+                        <label className="block mb-1 font-medium">Quận/Huyện</label>
                         <select
                             className="w-full border rounded-md px-3 py-2"
                             value={formData.district}

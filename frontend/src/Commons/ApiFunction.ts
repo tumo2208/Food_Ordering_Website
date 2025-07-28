@@ -1,4 +1,4 @@
-import type {LoginData, MenuCategory, RegistrationUserData, Restaurant} from "./Type.ts";
+import type {LoginData, MenuCategory, RegistrationUserData, Restaurant, User} from "./Type.ts";
 import {menuCategories, restaurantData} from "./DataDummy.ts";
 
 // export const searchFunction = async (query:SearchOptions) => {
@@ -70,6 +70,18 @@ export async function getUserProfile() {
         return response.data;
     } catch (error) {
         console.error('Get user profile error:', error);
+        throw error;
+    }
+}
+
+export async function updateUserProfile(userData: User) {
+    try {
+        const response = await api.put('/user/update', userData, {
+            headers: getHeaders(),
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Update user profile error:', error);
         throw error;
     }
 }
