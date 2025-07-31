@@ -8,6 +8,7 @@ import {
     type SetStateAction
 } from 'react';
 import type {User} from "../../Commons/Type.ts";
+import {getUserProfile} from "../../Commons/ApiFunction.ts";
 
 interface LayoutProps {
     children: ReactNode;
@@ -32,28 +33,21 @@ export const UserProvider = ({ children }: LayoutProps) => {
         citizenId: "",
         dob: "",
         gender: "OTHER",
+        role: "CUSTOMER",
         restaurantId: "",
     });
-    const [didLoad, setDidLoad] = useState(false);
 
     useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-        // console.log("Stored user data:", storedUser);
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
+        const fetchUser = async () => {
+            try {
+                const userData = await getUserProfile();
+                setUser(userData);
+            } catch (error) {
+                console.error("Bạn chưa đăng nhập");
+            }
         }
-        setDidLoad(true);
+        fetchUser();
     }, []);
-
-    useEffect(() => {
-        if (!didLoad) return;
-        // console.log("UserContext updated:", user);
-        if (user) {
-            localStorage.setItem('user', JSON.stringify(user));
-        } else {
-            localStorage.removeItem('user');
-        }
-    }, [user]);
 
     return (
         <UserContext.Provider value={{ user, setUser }}>

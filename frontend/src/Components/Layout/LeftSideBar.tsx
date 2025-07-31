@@ -1,7 +1,7 @@
 import {NavLink, useNavigate} from "react-router-dom";
 import {BanknotesIcon, ChartBarIcon, ClockIcon, Cog6ToothIcon, HomeIcon, XMarkIcon} from "@heroicons/react/24/solid";
 import {useEffect, useState} from "react";
-import {isAuthenticated, isRestaurantOwner, logout} from "../../Commons/ApiFunction.ts";
+import {logout} from "../../Commons/ApiFunction.ts";
 import { useUser } from '../../Context/User/UserContext.tsx';
 import {Menu} from "@headlessui/react";
 
@@ -13,13 +13,17 @@ interface SideBarProps {
 const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
     const navigate = useNavigate();
     const [loginState, setLoginState] = useState(false);
-    const [restaurantOwner, setRestaurantOwner] = useState(false);
+    const [isRestaurantOwner, setIsRestaurantOwner] = useState(false);
     const { user } = useUser();
     const [showMyRestaurantOption, setShowMyRestaurantOption] = useState(false);
 
     useEffect(() => {
-        const authenticated = isAuthenticated();
-        setRestaurantOwner(isRestaurantOwner());
+        const authenticated = user !== null && user.email !== "";
+        if (authenticated && user.role === "RESTAURANT_OWNER") {
+            setIsRestaurantOwner(true);
+        } else {
+            setIsRestaurantOwner(false);
+        }
         setLoginState(authenticated);
         console.log("User: ", user);
     }, [user]);
@@ -27,10 +31,10 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
     const handleLogout = async () => {
         const confirmLogout = window.confirm("Are you sure you want to logout?");
         if (confirmLogout) {
-            logout();
+            await logout();
             console.log("Logout: ", user);
             setLoginState(false);
-            setRestaurantOwner(false);
+            setIsRestaurantOwner(false);
             setTimeout(() => {
                 navigate('/');
             }, 500);
@@ -79,7 +83,7 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
                     {/*    <span>Message</span>*/}
                     {/*</NavLink>*/}
 
-                    {(loginState && !restaurantOwner) && (
+                    {(loginState && !isRestaurantOwner) && (
                         <NavLink to="/history" className={({isActive}) =>
                             `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
                         }>
@@ -88,7 +92,7 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
                         </NavLink>
                     )}
 
-                    {loginState && restaurantOwner && (
+                    {loginState && isRestaurantOwner && (
                         <div className="mb-8">
                             <button
                                 type="button"

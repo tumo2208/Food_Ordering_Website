@@ -37,7 +37,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String token = getTokenFromRequest(request);
-        if (token != null) {
+        if (token != null && token != "") {
             // Check if the token is blacklisted
             if (tokenBlacklistService.isTokenBlacklisted(token)) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token has been logged out");

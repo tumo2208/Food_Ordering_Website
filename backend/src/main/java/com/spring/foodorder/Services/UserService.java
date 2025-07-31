@@ -45,6 +45,7 @@ public class UserService {
         userDTO.setCity(user.getAddress().getCity());
         userDTO.setDob(user.getDob());
         userDTO.setGender(user.getGender());
+        userDTO.setRole(user.getRole());
         userDTO.setRestaurantId(user.getRestaurantId());
         userDTO.setCreatedAt(user.getCreatedAt());
         return userDTO;

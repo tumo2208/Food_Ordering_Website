@@ -87,5 +87,6 @@ export interface User {
     citizenId: string;
     dob: string;
     gender: "MALE" | "FEMALE" | "OTHER";
+    role: "CUSTOMER" | "RESTAURANT_OWNER" | "ADMIN";
     restaurantId?: string;
 }

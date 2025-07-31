@@ -20,14 +20,6 @@ export const api = axios.create({
     baseURL: 'http://localhost:3001',
 });
 
-function getHeaders() {
-    const token = localStorage.getItem('token');
-    return {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-    }
-}
-
 export async function register(registrationData:RegistrationUserData) {
     try {
         return await api.post('/auth/register', registrationData);
@@ -39,34 +31,25 @@ export async function register(registrationData:RegistrationUserData) {
 
 export async function login(loginData:LoginData) {
     try {
-        return await api.post('/auth/login', loginData);
+        return await api.post('/auth/login', loginData, { withCredentials: true });
     } catch (error) {
         console.error('Login error:', error);
         throw error;
     }
 }
 
-export function logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('user');
-}
-
-export function isAuthenticated() {
-    const token = localStorage.getItem('token');
-    return !!token;
-}
-
-export function isRestaurantOwner() {
-    const role = localStorage.getItem('role');
-    return role === 'RESTAURANT_OWNER';
+export async function logout() {
+    try {
+        return await api.get('/auth/logout', { withCredentials: true });
+    } catch (error) {
+        console.error('Logout error:', error);
+        throw error;
+    }
 }
 
 export async function getUserProfile() {
     try {
-        const response = await api.get('/user/profile', {
-            headers: getHeaders(),
-        });
+        const response = await api.get('/user/profile', { withCredentials: true });
         return response.data;
     } catch (error) {
         console.error('Get user profile error:', error);
@@ -76,9 +59,8 @@ export async function getUserProfile() {
 
 export async function updateUserProfile(userData: User) {
     try {
-        const response = await api.put('/user/update', userData, {
-            headers: getHeaders(),
-        });
+        console.log(userData);
+        const response = await api.put('/user/update', userData, { withCredentials: true });
         return response.data;
     } catch (error) {
         console.error('Update user profile error:', error);

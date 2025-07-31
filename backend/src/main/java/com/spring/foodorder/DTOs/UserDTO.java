@@ -2,6 +2,7 @@ package com.spring.foodorder.DTOs;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.spring.foodorder.Enums.Gender;
+import com.spring.foodorder.Enums.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -40,6 +41,8 @@ public class UserDTO {
     private LocalDate dob;
 
     private Gender gender;
+
+    private UserRole role;
 
     private String restaurantId;
 

@@ -39,7 +39,6 @@ const ProfileEdit = () => {
         e.preventDefault();
         try {
             await updateUserProfile(userClone);
-            // localStorage.setItem("user", JSON.stringify(user));
             setUser(userClone);
             navigate("/profile");
         } catch (error) {
