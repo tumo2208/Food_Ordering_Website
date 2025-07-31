@@ -65,4 +65,14 @@ public class JwtUtils {
                 .getExpiration();
         return expirationDate.before(new Date());
     }
+
+    public long getExpirationTime(String token) {
+        Date expirationDate = Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getBody()
+                .getExpiration();
+        return expirationDate.getTime() - System.currentTimeMillis();
+    }
 }

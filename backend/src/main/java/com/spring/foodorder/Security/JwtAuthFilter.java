@@ -2,6 +2,7 @@ package com.spring.foodorder.Security;
 
 import com.spring.foodorder.Documents.User;
 import com.spring.foodorder.Services.CustomUserDetailsService;
+import com.spring.foodorder.Services.TokenBlackListService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -25,14 +26,24 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtils jwtUtils;
+
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
+
+    @Autowired
+    private TokenBlackListService tokenBlacklistService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String token = getTokenFromRequest(request);
         if (token != null) {
+            // Check if the token is blacklisted
+            if (tokenBlacklistService.isTokenBlacklisted(token)) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token has been logged out");
+                return;
+            }
+
             String username = jwtUtils.getUsernameFromToken(token);
             User user = customUserDetailsService.loadUserByUsername(username);
             if (username != null && jwtUtils.isTokenValid(token, user)) {
@@ -49,7 +60,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private String getTokenFromRequest(HttpServletRequest request) {
+    public static String getTokenFromRequest(HttpServletRequest request) {
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if ("token".equals(cookie.getName())) {

@@ -30,6 +30,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TokenBlackListService tokenBlacklistService;
+
     // Method to map UserEntity to User DTO
     public UserDTO fromUser(User user) {
         UserDTO userDTO = new UserDTO();
@@ -83,6 +86,14 @@ public class UserService {
             throw new InvalidCredentialsException("Password does not match");
         }
         return jwtUtils.generateToken(user);
+    }
+
+    // Method to log out a user
+    public void logout(String token) {
+        if (token != null) {
+            long expiration = jwtUtils.getExpirationTime(token);
+            tokenBlacklistService.blacklistToken(token, expiration);
+        }
     }
 
     // Method to get the currently logged-in user
