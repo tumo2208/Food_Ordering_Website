@@ -1,7 +1,6 @@
 package com.spring.foodorder.Services;
 
 import com.spring.foodorder.DTOs.LoginForm;
-import com.spring.foodorder.DTOs.LoginResponse;
 import com.spring.foodorder.DTOs.RegistrationUserForm;
 import com.spring.foodorder.DTOs.UserDTO;
 import com.spring.foodorder.Enums.UserRole;
@@ -77,14 +76,13 @@ public class UserService {
     }
 
     // Method to log in a user
-    public LoginResponse login(LoginForm loginForm) {
+    public String login(LoginForm loginForm) {
         User user = userRepository.findByEmail(loginForm.getEmail())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + loginForm.getEmail()));
         if (!passwordEncoder.matches(loginForm.getPassword(), user.getPassword())) {
             throw new InvalidCredentialsException("Password does not match");
         }
-        String token = jwtUtils.generateToken(user);
-        return new LoginResponse(token, user.getRole().name(), fromUser(user));
+        return jwtUtils.generateToken(user);
     }
 
     // Method to get the currently logged-in user

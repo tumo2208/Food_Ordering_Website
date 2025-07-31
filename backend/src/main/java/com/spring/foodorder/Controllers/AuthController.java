@@ -1,11 +1,12 @@
 package com.spring.foodorder.Controllers;
 
 import com.spring.foodorder.DTOs.LoginForm;
-import com.spring.foodorder.DTOs.LoginResponse;
 import com.spring.foodorder.DTOs.RegistrationUserForm;
 import com.spring.foodorder.Exceptions.InvalidCredentialsException;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;
 import com.spring.foodorder.Services.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,10 +31,17 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginForm loginForm) {
+    public ResponseEntity<?> loginUser(@RequestBody LoginForm loginForm, HttpServletResponse response) {
         try {
-            LoginResponse response = userService.login(loginForm);
-            return ResponseEntity.ok(response);
+            String token = userService.login(loginForm);
+
+            Cookie cookie = new Cookie("token", token);
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
+            cookie.setMaxAge(24 * 60 * 60);
+            response.addCookie(cookie);
+
+            return ResponseEntity.ok("Login successfully");
         } catch (InvalidCredentialsException e) {
             return ResponseEntity.status(401).body("Invalid credentials: " + e.getMessage());
         } catch (ResourceNotFoundException e) {
