@@ -42,7 +42,7 @@ public class RestaurantService{
 
     // Method to register a restaurant
     public void registerRestaurant(RegistrationRestaurantForm registrationRestaurantForm) {
-        User currentUser = userService.getUserProfile();
+        User currentUser = userService.getCurrentUser();
         if (currentUser == null ) {
             throw new IllegalArgumentException("You must be logged in as a restaurant owner to register a restaurant.");
         } else if (currentUser.getRestaurantId() != null) {

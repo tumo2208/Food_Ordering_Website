@@ -86,16 +86,22 @@ public class UserService {
     }
 
     // Method to get the currently logged-in user
-    public User getUserProfile() {
+    public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
     }
 
+    //Method to get user profile
+    public UserDTO getUserProfile() {
+        User currentUser = getCurrentUser();
+        return fromUser(currentUser);
+    }
+
     // Method to update user profile
     public void updateUserProfile(UserDTO updatedUser) {
-        User currentUser = getUserProfile();
+        User currentUser = getCurrentUser();
         if (updatedUser.getEmail() != null && !updatedUser.getEmail().equals(currentUser.getEmail())) {
             Optional<User> existingUser = userRepository.findByEmail(updatedUser.getEmail());
             if (existingUser.isPresent()) {

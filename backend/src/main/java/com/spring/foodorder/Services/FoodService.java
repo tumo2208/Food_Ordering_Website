@@ -44,7 +44,7 @@ public class FoodService {
 
     // Method to add a food item to restaurant menu
     public void addFoodItemToRestaurantMenu(FoodItemDTO foodItem) {
-        User currentUser = userService.getUserProfile();
+        User currentUser = userService.getCurrentUser();
         if (currentUser == null || currentUser.getRestaurantId() == null) {
             throw new ResourceNotFoundException("You must be logged in as a restaurant owner to add food items.");
         }
