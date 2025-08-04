@@ -2,6 +2,8 @@
 //     query: string;
 // }
 //
+import {NationalFoodTypeMap} from "./DataDummy.ts";
+
 export interface FoodType {
     id: number;
     name: string;
@@ -37,21 +39,6 @@ export interface MenuItem {
     favorite?: boolean;
 }
 
-export interface Restaurant {
-    id: number;
-    name: string;
-    image: string;
-    rating: number;
-    ratingCount: number;
-    cuisineType: string;
-    priceRange: string;
-    address: string;
-    distance: number;
-    deliveryTime: number;
-    minOrder: number;
-    favorite?: boolean;
-    phone?:string
-}
 
 export interface CuisineFilter {
     id: number;
@@ -90,3 +77,29 @@ export interface User {
     role: "CUSTOMER" | "RESTAURANT_OWNER" | "ADMIN";
     restaurantId?: string;
 }
+
+export type CuisineType = keyof typeof NationalFoodTypeMap;
+
+export interface Restaurant {
+    id: number;
+    restaurantName: string;
+    contactNumber: string;
+    contactEmail: string;
+    location: {
+        address: string;
+        district: string;
+        city: string;
+    }
+    description: string;
+    rating: {
+        rating: number;
+        numberOfRatings: number;
+    };
+    cuisineTypes: CuisineType[];
+    minPrice: number;
+    maxPrice: number;
+    avgPrice: number;
+    imgUrl: string;
+}
+
+

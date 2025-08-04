@@ -10,6 +10,7 @@ const ProfileEdit = () => {
     const [userClone, setUserClone] = useState(user);
 
     const cities = Object.keys(provinceData);
+    // @ts-ignore
     const districts = userClone.city ? provinceData[userClone.city] : [];
 
     const setSelectedCity = (city: string) => {
@@ -143,7 +144,7 @@ const ProfileEdit = () => {
                             disabled={!userClone.city}
                         >
                             <option value="">Chọn quận/huyện</option>
-                            {districts.map((district) => (
+                            {districts.map((district:string) => (
                                 <option key={district} value={district}>
                                     {district}
                                 </option>

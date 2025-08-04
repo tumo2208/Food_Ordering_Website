@@ -40,7 +40,7 @@ const Layout = ({children}:LayoutProps) => {
 
                 {/* Main Content */}
                 <main className="p-3 sm:p-4 md:p-5 w-full">
-                    {location.pathname !== '/profile' && location.pathname !== '/profile/edit' && <Header />}
+                    {location.pathname === '/' && <Header />}
                     {children}
                 </main>
             </div>

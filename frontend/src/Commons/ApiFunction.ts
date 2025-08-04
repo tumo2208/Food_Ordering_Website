@@ -1,14 +1,14 @@
-import type {LoginData, MenuCategory, RegistrationUserData, Restaurant, User} from "./Type.ts";
-import {menuCategories, restaurantData} from "./DataDummy.ts";
+import type {LoginData, MenuCategory, RegistrationUserData, User} from "./Type.ts";
+import {menuCategories} from "./DataDummy.ts";
 
 // export const searchFunction = async (query:SearchOptions) => {
 //     const res = smartSearch(query);
 //     return Promise.resolve(res);
 // }
 
-export const getRestaurantById = (id: number): Restaurant | undefined => {
-    return restaurantData.find(restaurant => restaurant.id === id);
-};
+// export const getRestaurantById = (id: number): Restaurant | undefined => {
+//     return restaurantData.find(restaurant => restaurant.id === id);
+// };
 
 export const getMenuForRestaurant = (id: number): MenuCategory[] => {
     return menuCategories[id] || [];
@@ -76,6 +76,50 @@ export async function searchFunction(query: String) {
         return response.data;
     } catch (error) {
         console.error('Search failed: ', error);
+        throw error;
+    }
+}
+
+export async function getAllRestaurants() {
+    try {
+        const response = await api.get("/restaurant/getByCuisineType");
+        return response.data;
+    } catch (error) {
+        console.error('Get restaurants by cuisine type failed: ', error);
+        throw error;
+    }
+}
+
+export async function getRestaurantsByCuisineType(cuisineType: string) {
+    try {
+        const response = await api.get("/restaurant/getByCuisineType", {
+            params: { cuisineType: cuisineType}
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Get restaurants by cuisine type failed: ', error);
+        throw error;
+    }
+}
+
+export async function getRestaurantsByCuisineTypes(cuisineType: string[]) {
+    try {
+        const response = await api.get("/restaurant/getByCuisineType", {
+            params: { cuisineType: cuisineType}
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Get restaurants by cuisine type failed: ', error);
+        throw error;
+    }
+}
+
+export async function getRestaurantById(restaurantId: string) {
+    try {
+        const response = await api.get(`restaurant/${restaurantId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Get restaurant by id failed: ', error);
         throw error;
     }
 }

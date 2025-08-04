@@ -29,6 +29,7 @@ const Register = () => {
     const [success, setSuccess] = useState("");
 
     const cities = Object.keys(provinceData);
+    // @ts-ignore
     const districts = formData.city ? provinceData[formData.city] : [];
 
     const setSelectedCity = (city: string) => {
@@ -240,7 +241,7 @@ const Register = () => {
                             required
                         >
                             <option value="">Chọn quận/huyện</option>
-                            {districts.map((district) => (
+                            {districts.map((district:string) => (
                                 <option key={district} value={district}>
                                     {district}
                                 </option>

@@ -9,15 +9,26 @@ import RestaurantMenuCategory from "../../Components/Restaurant/RestaurantMenuCa
 const Restaurant = () => {
     const {id} = useParams();
     const [restaurant, setRestaurant] = useState<Restaurant>();
-    const [menuCategories, setMenuCategories] = useState<MenuCategory[]>([]);
+    const [cuisineTypes, setCuisineTypes] = useState("");
+    const [priceRange, setPriceRange] = useState("");
+    // const [menuCategories, setMenuCategories] = useState<MenuCategory[]>([]);
 
     useEffect(() => {
-        const data = getRestaurantById(Number(id));
-        if (data) {
-            setRestaurant(data);
-            const menuData = getMenuForRestaurant(Number(id));
-            setMenuCategories(menuData);
+        const fetchRestaurant = async (restaurantId: string) => {
+            try {
+                const response = await getRestaurantById(restaurantId);
+                setRestaurant(response.restaurant);
+                if (response.restaurant.cuisineTypes.length > 0) {
+                    setCuisineTypes(response.restaurant.cuisineTypes.join(", "));
+                }
+                setPriceRange(String(response.restaurant.minPrice) + "-" +  String(response.restaurant.maxPrice))
+                // const menuData = getMenuForRestaurant(Number(id));
+                // setMenuCategories(menuData);
+            } catch (error) {
+                console.error("Cannot fetch restaurant: ", error);
+            }
         }
+        fetchRestaurant(String(id));
     }, [id]);
 
     return (
@@ -27,37 +38,37 @@ const Restaurant = () => {
                     {/* Cover Image */}
                     <div className="h-64 w-full rounded-lg overflow-hidden mb-6 relative">
                         <img
-                            src={restaurant?.image}
-                            alt={restaurant?.name}
+                            src={restaurant?.imgUrl}
+                            alt={restaurant?.restaurantName}
                             className="w-full h-full object-cover"
                         />
                         <div className="absolute flex bottom-5 p-4 gap-1 flex-col">
                             <h1 className="text-3xl text-white font-bold mb-2">
-                                {restaurant?.name}
+                                {restaurant?.restaurantName}
                             </h1>
                             <div className="flex items-center gap-2 mb-2">
                                 <div className="flex">
-                                    <Rating rating={restaurant?.rating} />
+                                    <Rating rating={restaurant?.rating.rating} />
                                 </div>
                                 <span className="text-white">
-                                    {restaurant.rating} ({restaurant.ratingCount} reviews)
+                                    {restaurant.rating.rating} ({restaurant.rating.numberOfRatings} reviews)
                                 </span>
                             </div>
                             <div className="flex items-center gap-4">
-                                <span className="text-white">{restaurant.cuisineType}</span>
+                                <span className="text-white">{cuisineTypes}</span>
                                 <span className="text-white">•</span>
-                                <span className="text-white">{restaurant.priceRange}</span>
+                                <span className="text-white">{priceRange}</span>
                             </div>
                         </div>
                     </div>
 
-                    {/* Restaurant Detail and Menu */}
-                    <RestaurantDetails {...restaurant}/>
-                    {
-                        menuCategories?.map(category=>(
-                            <RestaurantMenuCategory restaurantId={String(restaurant.id)} restaurantName={restaurant.name} {...category} key={category.id}/>
-                        ))
-                    }
+                    {/*/!* Restaurant Detail and Menu *!/*/}
+                    {/*<RestaurantDetails {...restaurant}/>*/}
+                    {/*{*/}
+                    {/*    menuCategories?.map(category=>(*/}
+                    {/*        <RestaurantMenuCategory restaurantId={String(restaurant.id)} restaurantName={restaurant.name} {...category} key={category.id}/>*/}
+                    {/*    ))*/}
+                    {/*}*/}
                 </>
             )}
         </div>

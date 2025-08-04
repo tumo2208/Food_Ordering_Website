@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -54,8 +55,13 @@ public class RestaurantController {
     @GetMapping("/getByCuisineType")
     public ResponseEntity<?> getRestaurantsByCuisineType(@RequestParam(required = false) List<String> cuisineType) {
         try {
-            List<Restaurant> restaurants = restaurantService.getRestaurantsByCuisineType(
-                    cuisineType.stream().map(FoodType::valueOf).toList());
+            List<Restaurant> restaurants = new ArrayList<>();
+            if (cuisineType == null) {
+                restaurants = restaurantService.getRestaurantsByCuisineType(List.of());
+            } else {
+                restaurants = restaurantService.getRestaurantsByCuisineType(
+                        cuisineType.stream().map(FoodType::valueOf).toList());
+            }
             return ResponseEntity.ok(Collections.singletonMap("restaurants", restaurants));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(404).body("No restaurants found for this cuisine type: " + e.getMessage());

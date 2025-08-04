@@ -97,6 +97,10 @@ public class RestaurantService{
 
     // Method to get all restaurants with optional filtering by cuisine type
     public List<Restaurant> getRestaurantsByCuisineType(List<FoodType> cuisineTypes) {
-        return restaurantRepository.findByCuisineTypesIn(cuisineTypes);
+        if (cuisineTypes.size() == 0) {
+            return restaurantRepository.findAll();
+        } else {
+            return restaurantRepository.findByCuisineTypesIn(cuisineTypes);
+        }
     }
 }
