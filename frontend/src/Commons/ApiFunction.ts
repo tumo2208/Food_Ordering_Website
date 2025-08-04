@@ -1,20 +1,6 @@
-import type {LoginData, MenuCategory, RegistrationUserData, User} from "./Type.ts";
-import {menuCategories} from "./DataDummy.ts";
-
-// export const searchFunction = async (query:SearchOptions) => {
-//     const res = smartSearch(query);
-//     return Promise.resolve(res);
-// }
-
-// export const getRestaurantById = (id: number): Restaurant | undefined => {
-//     return restaurantData.find(restaurant => restaurant.id === id);
-// };
-
-export const getMenuForRestaurant = (id: number): MenuCategory[] => {
-    return menuCategories[id] || [];
-};
-
+import type {LoginData, RegistrationUserData, User} from "./Type.ts";
 import axios from 'axios';
+import qs from 'qs'
 
 export const api = axios.create({
     baseURL: 'http://localhost:3001',
@@ -127,6 +113,38 @@ export async function getRestaurantById(restaurantId: string) {
         return response.data;
     } catch (error) {
         console.error('Get restaurant by id failed: ', error);
+        throw error;
+    }
+}
+
+export async function getFoodByRestaurantIdAndFoodType(restaurantId: string, cuisineType: string) {
+    try {
+        const response = await api.get(`/food/getByRestaurant&CuisineType`, {
+            params: {
+                restaurantId: restaurantId,
+                cuisineTypes: cuisineType
+            }
+        });
+        return response.data.foodItems;
+    } catch (error) {
+        console.error('Get food by restaurant id and cuisine type failed: ', error);
+        throw error;
+    }
+}
+
+export async function getFoodByRestaurantIdAndFoodTypes(restaurantId: string, cuisineTypes: string[]) {
+    try {
+        const response = await api.get(`/food/getByRestaurant&CuisineType`, {
+            params: {
+                restaurantId: restaurantId,
+                cuisineTypes: cuisineTypes
+            },
+            paramsSerializer: (params) =>
+                qs.stringify(params, { arrayFormat: 'repeat' })
+        });
+        return response.data.foodItems;
+    } catch (error) {
+        console.error('Get food by restaurant id and cuisine types failed: ', error);
         throw error;
     }
 }

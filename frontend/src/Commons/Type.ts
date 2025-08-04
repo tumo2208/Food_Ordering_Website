@@ -1,8 +1,7 @@
-// export interface SearchOptions {
-//     query: string;
-// }
-//
-import {NationalFoodTypeMap} from "./DataDummy.ts";
+import {CookingFoodTypeMap, NationalFoodTypeMap} from "./DataDummy.ts";
+
+export type NationalCuisineType = keyof typeof NationalFoodTypeMap;
+export type CookingCuisineType = keyof typeof CookingFoodTypeMap;
 
 export interface FoodType {
     id: number;
@@ -10,39 +9,14 @@ export interface FoodType {
     image: string;
 }
 
-export interface FoodItem {
-    id: number;
-    name: string;
+export interface SizeToPrice {
+    size: string;
     price: number;
-    image: string;
+}
+
+export interface Rating {
     rating: number;
-    discount?: number;
-    favorite?: boolean;
-    restaurantId?: string;
-    restaurantName?: string;
-}
-
-export interface MenuCategory {
-    id: number;
-    name: string;
-    items: MenuItem[];
-}
-
-export interface MenuItem {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    image: string;
-    rating: number;
-    discount?: number;
-    favorite?: boolean;
-}
-
-
-export interface CuisineFilter {
-    id: number;
-    name: string;
+    numberOfRatings: number;
 }
 
 export interface LoginData {
@@ -78,10 +52,8 @@ export interface User {
     restaurantId?: string;
 }
 
-export type CuisineType = keyof typeof NationalFoodTypeMap;
-
 export interface Restaurant {
-    id: number;
+    id: string;
     restaurantName: string;
     contactNumber: string;
     contactEmail: string;
@@ -91,15 +63,26 @@ export interface Restaurant {
         city: string;
     }
     description: string;
-    rating: {
-        rating: number;
-        numberOfRatings: number;
-    };
-    cuisineTypes: CuisineType[];
+    operatingHours: string;
+    rating: Rating;
+    cuisineTypes: NationalCuisineType[];
     minPrice: number;
     maxPrice: number;
     avgPrice: number;
     imgUrl: string;
 }
+
+export interface FoodItem {
+    id: string;
+    name: string;
+    minPrice: number;
+    sizeToPrices: SizeToPrice[];
+    description: string;
+    cuisineTypes: CookingCuisineType[];
+    imgUrl: string;
+    rating: Rating;
+    restaurantId: string;
+}
+
 
 

@@ -1,9 +1,8 @@
 import type { Restaurant } from '../../Commons/Type.ts'
 import { Link } from 'react-router-dom'
-import { ClockIcon, HeartIcon } from '@heroicons/react/24/outline'
+// import { ClockIcon, HeartIcon } from '@heroicons/react/24/outline'
 import Rating from './Rating.tsx'
 import {useEffect, useState} from "react";
-import {getRestaurantById} from "../../Commons/ApiFunction.ts";
 
 const RestaurantCard = (restaurant:Restaurant) => {
     const [cuisineTypes, setCuisineTypes] = useState("");

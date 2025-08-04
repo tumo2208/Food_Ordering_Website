@@ -53,7 +53,7 @@ public class FoodController {
         }
     }
 
-    @GetMapping("/getByRestaurat&CuisineType")
+    @GetMapping("/getByRestaurant&CuisineType")
     public ResponseEntity<?> getFoodItemsOfRestaurantByFoodType(
             @RequestParam(required = false) String restaurantId,
             @RequestParam(required = false) List<String> cuisineTypes) {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {type CuisineType, type Restaurant} from "../../Commons/Type.ts";
+import {type NationalCuisineType, type Restaurant} from "../../Commons/Type.ts";
 import {NationalFoodTypeMap, sortOptions} from "../../Commons/DataDummy.ts";
 import { AdjustmentsHorizontalIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import RestaurantCard from "../../Components/Restaurant/RestaurantCard";
@@ -16,7 +16,7 @@ const Restaurants = () => {
     const totalPages = Math.ceil(cuisineTypes.length / maxVisible);
     const currentPage = Math.floor(startIdx / maxVisible);
 
-    const [activeCuisine,setActiveCuisine] = useState<CuisineType | "All">("All");
+    const [activeCuisine,setActiveCuisine] = useState<NationalCuisineType | "All">("All");
     const [activeSort,setActiveSort]= useState<string>('rating');
     const [filteredRestaurants,setFilteredRestaurants] = useState<Restaurant[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
