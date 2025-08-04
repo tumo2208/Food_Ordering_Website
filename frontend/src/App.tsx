@@ -2,6 +2,7 @@ import Layout from "./Components/Layout/Layout.tsx";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard/Dashboard.tsx";
 import Restaurants from "./Pages/Restaurants/Restaurants.tsx";
+// @ts-ignore
 import Restaurant from "./Pages/Restaurants/Restaurant.tsx";
 import RightSideBar from "./Components/Layout/RightSideBar.tsx";
 import Checkout from "./Pages/Checkout/Checkout.tsx";
@@ -10,6 +11,7 @@ import Login from "./Pages/Auth/Login.tsx";
 import Register from "./Pages/Auth/Register.tsx";
 import Profile from "./Pages/Profile/Profile.tsx";
 import ProfileEdit from "./Pages/Profile/ProfileEdit.tsx";
+import ChangePassword from "./Pages/Profile/ChangePassword.tsx";
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
               <Route path="/order-track/:orderId" element={<Layout><OrderTracking /></Layout>} />
               <Route path={"/profile"} element={<Layout><Profile/></Layout>} />
               <Route path={"/profile/edit"} element={<Layout><ProfileEdit/></Layout>} />
+              <Route path={"/profile/change-password"} element={<Layout><ChangePassword/></Layout>} />
               <Route path="/cart" element={<RightSideBar />} />
           </Routes>
       </BrowserRouter>

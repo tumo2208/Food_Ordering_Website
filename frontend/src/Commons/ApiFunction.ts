@@ -68,6 +68,13 @@ export async function updateUserProfile(userData: User) {
     }
 }
 
+export async function changePassword(oldPassword: string, newPassword: string) {
+    return await api.put('/user/changePassword', {
+        oldPassword: oldPassword,
+        newPassword: newPassword
+    }, { withCredentials: true });
+}
+
 export async function searchFunction(query: String) {
     try {
         const response = await api.get("/search/search", {

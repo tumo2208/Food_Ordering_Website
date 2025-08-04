@@ -1,5 +1,6 @@
 package com.spring.foodorder.Services;
 
+import com.spring.foodorder.DTOs.ChangePasswordForm;
 import com.spring.foodorder.DTOs.LoginForm;
 import com.spring.foodorder.DTOs.RegistrationUserForm;
 import com.spring.foodorder.DTOs.UserDTO;
@@ -95,6 +96,16 @@ public class UserService {
             long expiration = jwtUtils.getExpirationTime(token);
             tokenBlacklistService.blacklistToken(token, expiration);
         }
+    }
+
+    // Method to change password
+    public void changePassword(ChangePasswordForm changePasswordForm) {
+        User currentUser = getCurrentUser();
+        if (!passwordEncoder.matches(changePasswordForm.getOldPassword(), currentUser.getPassword())) {
+            throw new InvalidCredentialsException("Old password does not match");
+        }
+        currentUser.setPassword(passwordEncoder.encode(changePasswordForm.getNewPassword()));
+        userRepository.save(currentUser);
     }
 
     // Method to get the currently logged-in user

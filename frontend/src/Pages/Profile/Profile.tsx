@@ -83,18 +83,20 @@ const Profile = () => {
                 <div className="flex flex-col md:flex-row gap-6 mt-10">
                     <button
                         className="flex items-center justify-center gap-3 w-full bg-amber-500 text-white py-2 rounded-md font-bold hover:bg-amber-600 transition"
-                        onClick={() => navigate("/change-password")}
+                        onClick={() => navigate("/profile/change-password")}
                     >
                         <KeyIcon className="h-5 w-5"/>
                         Thay đổi mật khẩu
                     </button>
-                    <button
+                    { user.role === "CUSTOMER" && <button
                         className="flex items-center justify-center gap-3 w-full bg-amber-500 text-white py-2 rounded-md font-bold hover:bg-amber-600 transition"
                         onClick={() => navigate("/register-restaurant-owner")}
                     >
                         <UserPlusIcon className="h-5 w-5"/>
                         Đăng ký làm chủ nhà hàng
                     </button>
+                    }
+
                 </div>
             </div>
         </div>
