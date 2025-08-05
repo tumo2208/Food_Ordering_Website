@@ -2,7 +2,6 @@ package com.spring.foodorder.Controllers;
 
 import com.spring.foodorder.DTOs.RegistrationRestaurantForm;
 import com.spring.foodorder.Enums.FoodType;
-import com.spring.foodorder.Exceptions.ResourceAlreadyExistsException;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;
 import com.spring.foodorder.Documents.Restaurant;
 import com.spring.foodorder.Services.RestaurantService;
@@ -29,12 +28,12 @@ public class RestaurantController {
     @PostMapping("/register")
     public ResponseEntity<?> registerRestaurant(@RequestBody RegistrationRestaurantForm registrationRestaurantForm) {
         try {
-            restaurantService.registerRestaurant(registrationRestaurantForm);
-            return ResponseEntity.ok("Restaurant registered successfully");
+            restaurantService.requestRestaurantRegistration(registrationRestaurantForm);
+            return ResponseEntity.ok("Request for restaurant registration submitted successfully. Please wait for approval.");
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body("Registration failed: " + e.getMessage());
-        } catch (ResourceAlreadyExistsException e) {
-            return ResponseEntity.status(409).body("Registration failed: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Request for restaurant registration failed: You are already registered as a restaurant owner.");
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(409).body("Request for restaurant registration failed: You must log in to register restaurant owner.");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("An unexpected error occurred: " + e.getMessage());
         }

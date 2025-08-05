@@ -46,5 +46,7 @@ public class UserDTO {
 
     private String restaurantId;
 
+    private String requestId;
+
     private LocalDate createdAt;
 }

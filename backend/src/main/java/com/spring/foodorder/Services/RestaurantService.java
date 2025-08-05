@@ -1,22 +1,18 @@
 package com.spring.foodorder.Services;
 
 import com.spring.foodorder.DTOs.RegistrationRestaurantForm;
+import com.spring.foodorder.Documents.PendingRestaurantRegisterRequest;
 import com.spring.foodorder.Enums.FoodType;
-import com.spring.foodorder.Enums.UserRole;
-import com.spring.foodorder.Exceptions.ResourceAlreadyExistsException;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;
-import com.spring.foodorder.Objects.Address;
 import com.spring.foodorder.Documents.Restaurant;
 import com.spring.foodorder.Documents.User;
-import com.spring.foodorder.Objects.Rating;
+import com.spring.foodorder.Repositories.PendingRestaurantRegisterRequestRepository;
 import com.spring.foodorder.Repositories.RestaurantRepository;
 import com.spring.foodorder.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class RestaurantService{
@@ -24,13 +20,16 @@ public class RestaurantService{
     private RestaurantRepository restaurantRepository;
 
     @Autowired
+    private PendingRestaurantRegisterRequestRepository pendingRestaurantRegisterRequestRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
     private CloudinaryService cloudinaryService;
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private UserService userService;
 
     // Method to search restaurants by name or description
     public List<Restaurant> searchRestaurants(String query) {
@@ -40,54 +39,38 @@ public class RestaurantService{
         return restaurantRepository.findByRestaurantNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(query, query);
     }
 
-    // Method to register a restaurant
-    public void registerRestaurant(RegistrationRestaurantForm registrationRestaurantForm) {
+    // Method to request restaurant registration
+    public void requestRestaurantRegistration(RegistrationRestaurantForm form) {
         User currentUser = userService.getCurrentUser();
-        if (currentUser == null ) {
-            throw new IllegalArgumentException("You must be logged in as a restaurant owner to register a restaurant.");
-        } else if (currentUser.getRestaurantId() != null) {
+        if (currentUser.getRestaurantId() != null) {
             throw new IllegalArgumentException("You are already registered as a restaurant owner.");
         }
 
-        // Create a new restaurant entity
-        Optional<Restaurant> restaurant = restaurantRepository
-                .findByContactEmail(registrationRestaurantForm.getContactEmail());
-        if (restaurant.isPresent()) {
-            throw new ResourceAlreadyExistsException("Restaurant with this email already exists.");
-        }
-        Restaurant newRestaurant = new Restaurant();
-        newRestaurant.setOwnerId(currentUser.getId());
-        newRestaurant.setRestaurantName(registrationRestaurantForm.getRestaurantName());
-        newRestaurant.setContactNumber(registrationRestaurantForm.getContactNumber());
-        newRestaurant.setContactEmail(registrationRestaurantForm.getContactEmail());
-        newRestaurant.setDescription(registrationRestaurantForm.getDescription());
-        newRestaurant.setOperatingHours(registrationRestaurantForm.getOperatingHours());
-        newRestaurant.setCuisineTypes(registrationRestaurantForm.getCuisineTypes()
-                .stream().map(FoodType::fromVietnameseName).collect(Collectors.toList()));
-        newRestaurant.setLocation(new Address(registrationRestaurantForm.getLocationAddress(),
-                registrationRestaurantForm.getLocationDistrict(),
-                registrationRestaurantForm.getLocationCity()));
-        newRestaurant.setRating(new Rating(0, 0)); // Initialize rating with zero count and total
-
-        newRestaurant.setMaxPrice(0);
-        newRestaurant.setMinPrice(0);
-        newRestaurant.setAvgPrice(0);
+        PendingRestaurantRegisterRequest request = new PendingRestaurantRegisterRequest();
+        request.setOwnerId(currentUser.getId());
+        request.setRestaurantName(form.getRestaurantName());
+        request.setDescription(form.getDescription());
+        request.setContactEmail(form.getContactEmail());
+        request.setContactNumber(form.getContactNumber());
+        request.setCuisineTypes(form.getCuisineTypes());
+        request.setLocationAddress(form.getLocationAddress());
+        request.setLocationDistrict(form.getLocationDistrict());
+        request.setLocationCity(form.getLocationCity());
+        request.setOperatingHours(form.getOperatingHours());
 
         // Handle image upload if provided
-        if (registrationRestaurantForm.getRestaurantImage() != null
-                && !registrationRestaurantForm.getRestaurantImage().isEmpty()) {
-            String imageUrl = cloudinaryService.uploadImage(registrationRestaurantForm.getRestaurantImage(),
-                    registrationRestaurantForm.getRestaurantName());
-            newRestaurant.setImgUrl(imageUrl);
+        if (form.getRestaurantImage() != null
+                && !form.getRestaurantImage().isEmpty()) {
+            String imageUrl = cloudinaryService.uploadImage(form.getRestaurantImage(),
+                    form.getRestaurantName());
+            request.setRestaurantImageUrl(imageUrl);
         }
-        restaurantRepository.save(newRestaurant);
 
-        // Update the user's role to RESTAURANT_OWNER
-        currentUser.setRole(UserRole.RESTAURANT_OWNER);
-        currentUser.setRestaurantId(newRestaurant.getId());
+        pendingRestaurantRegisterRequestRepository.save(request);
+
+        currentUser.setRequestId(request.getId());
         userRepository.save(currentUser);
     }
-
 
     // Method to get restaurant by ID
     public Restaurant getRestaurantById(String restaurantId) {

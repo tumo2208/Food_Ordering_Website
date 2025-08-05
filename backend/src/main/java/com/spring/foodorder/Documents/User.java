@@ -61,6 +61,9 @@ public class User implements UserDetails {
     @Field("restaurant_id")
     private String restaurantId;
 
+    @Field("request_id")
+    private String requestId;
+
     @Field("created_at")
     private final LocalDate createdAt = LocalDate.now();
 
