@@ -117,6 +117,20 @@ export async function getRestaurantById(restaurantId: string) {
     }
 }
 
+export async function getFoodByFoodType(cuisineType: string) {
+    try {
+        const response = await api.get(`/food/getByRestaurant&CuisineType` , {
+            params: {
+                cuisineTypes: cuisineType
+            }
+        });
+        return response.data.foodItems;
+    } catch (error) {
+        console.error('Get food by cuisine type failed: ', error);
+        throw error;
+    }
+}
+
 export async function getFoodByRestaurantIdAndFoodType(restaurantId: string, cuisineType: string) {
     try {
         const response = await api.get(`/food/getByRestaurant&CuisineType`, {

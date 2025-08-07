@@ -83,7 +83,7 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
                     {/*    <span>Message</span>*/}
                     {/*</NavLink>*/}
 
-                    {(loginState && !isRestaurantOwner) && (
+                    {loginState && (
                         <NavLink to="/history" className={({isActive}) =>
                             `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
                         }>

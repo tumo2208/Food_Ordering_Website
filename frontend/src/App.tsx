@@ -12,6 +12,7 @@ import Register from "./Pages/Auth/Register.tsx";
 import Profile from "./Pages/Profile/Profile.tsx";
 import ProfileEdit from "./Pages/Profile/ProfileEdit.tsx";
 import ChangePassword from "./Pages/Profile/ChangePassword.tsx";
+import Category from "./Pages/Category/Category.tsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Route path="/register" element={<Register />} />
 
               <Route path="/" element={<Layout><Dashboard /></Layout>} />
+              <Route path="/category/:foodType" element={<Layout><Category /></Layout>} />
               <Route path="/restaurants" element={<Layout><Restaurants /></Layout>} />
               <Route path="/restaurants/:id" element={<Layout><Restaurant /></Layout>} />
               <Route path="/checkout" element={<Layout><Checkout /></Layout>} />

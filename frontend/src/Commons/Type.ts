@@ -1,7 +1,8 @@
-import {CookingFoodTypeMap, NationalFoodTypeMap} from "./DataDummy.ts";
+import {CookingFoodTypeMap, FoodTypeMap, NationalFoodTypeMap} from "./DataDummy.ts";
 
 export type NationalCuisineType = keyof typeof NationalFoodTypeMap;
 export type CookingCuisineType = keyof typeof CookingFoodTypeMap;
+export type CuisineType = keyof typeof FoodTypeMap
 
 export interface FoodType {
     id: number;
@@ -65,7 +66,7 @@ export interface Restaurant {
     description: string;
     operatingHours: string;
     rating: Rating;
-    cuisineTypes: NationalCuisineType[];
+    cuisineTypes: CuisineType[];
     minPrice: number;
     maxPrice: number;
     avgPrice: number;
@@ -78,7 +79,7 @@ export interface FoodItem {
     minPrice: number;
     sizeToPrices: SizeToPrice[];
     description: string;
-    cuisineTypes: CookingCuisineType[];
+    cuisineTypes: CuisineType[];
     imgUrl: string;
     rating: Rating;
     restaurantId: string;
