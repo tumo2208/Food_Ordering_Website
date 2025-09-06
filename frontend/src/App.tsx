@@ -14,6 +14,10 @@ import ProfileEdit from "./Pages/Profile/ProfileEdit.tsx";
 import ChangePassword from "./Pages/Profile/ChangePassword.tsx";
 import Category from "./Pages/Category/Category.tsx";
 
+import DashboardAdmin from "./Pages/Admin/DashboardAdmin.tsx";
+import RequestList from "./Pages/Admin/RequestList.tsx";
+import RestaurantList from "./Pages/Admin/RestaurantList.tsx";
+
 function App() {
   return (
       <BrowserRouter>
@@ -31,6 +35,10 @@ function App() {
               <Route path={"/profile/edit"} element={<Layout><ProfileEdit/></Layout>} />
               <Route path={"/profile/change-password"} element={<Layout><ChangePassword/></Layout>} />
               <Route path="/cart" element={<RightSideBar />} />
+
+              <Route path={"/admin"} element={<Layout><DashboardAdmin/></Layout>} />
+              <Route path={"/admin/restaurants"} element={<Layout><RestaurantList/></Layout>} />
+              <Route path={"/admin/requests"} element={<Layout><RequestList/></Layout>} />
           </Routes>
       </BrowserRouter>
   )

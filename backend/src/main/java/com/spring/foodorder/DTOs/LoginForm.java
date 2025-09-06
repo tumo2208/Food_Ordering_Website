@@ -1,5 +1,6 @@
 package com.spring.foodorder.DTOs;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -10,4 +11,6 @@ public class LoginForm {
     private String email;
     @NotBlank(message = "Password cannot be blank")
     private String password;
+    @JsonProperty("isAdmin")
+    private boolean isAdmin;
 }

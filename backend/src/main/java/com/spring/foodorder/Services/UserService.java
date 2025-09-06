@@ -87,6 +87,12 @@ public class UserService {
         if (!passwordEncoder.matches(loginForm.getPassword(), user.getPassword())) {
             throw new InvalidCredentialsException("Password does not match");
         }
+        if (loginForm.isAdmin() && user.getRole() != UserRole.ADMIN) {
+            throw new InvalidCredentialsException("User is not an admin");
+        }
+        if (!loginForm.isAdmin() && user.getRole() == UserRole.ADMIN) {
+            throw new InvalidCredentialsException("Admin users must log in through the admin portal");
+        }
         return jwtUtils.generateToken(user);
     }
 

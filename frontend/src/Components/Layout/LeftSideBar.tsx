@@ -14,6 +14,7 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
     const navigate = useNavigate();
     const [loginState, setLoginState] = useState(false);
     const [isRestaurantOwner, setIsRestaurantOwner] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const { user } = useUser();
     const [showMyRestaurantOption, setShowMyRestaurantOption] = useState(false);
 
@@ -23,6 +24,11 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
             setIsRestaurantOwner(true);
         } else {
             setIsRestaurantOwner(false);
+        }
+        if (authenticated && user.role === "ADMIN") {
+            setIsAdmin(true);
+        } else {
+            setIsAdmin(false);
         }
         setLoginState(authenticated);
         console.log("User: ", user);
@@ -57,96 +63,126 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
             <div>
                 {/* Logo */}
                 <div className='mb-10 px-2'>
-                    <h1 className='text-2xl font-bold'>ShopeeFood <span className='text-primary text-3xl'>.</span></h1>
+                    {isAdmin ? (
+                        <h1 className='text-2xl font-bold'>ShopeeFood <span className='text-customblue text-3xl'>ADMIN</span></h1>
+                    ) : (
+                        <h1 className='text-2xl font-bold'>ShopeeFood <span className='text-primary text-3xl'>.</span></h1>
+                    )}
                 </div>
 
                 {/* Navigation Links */}
-                <nav className='space-y-6'>
-                    <NavLink to="/" className={({isActive}) =>
-                        `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
-                    }>
-                        <HomeIcon className="h-6 w-6"/>
-                        <span>Trang chủ</span>
-                    </NavLink>
+                {isAdmin ? (
+                    <nav className='space-y-6'>
+                        <NavLink to="/admin" end className={({isActive}) =>
+                            `flex mb-8 items-center gap-3 ${isActive ? 'text-customblue' : 'text-gray-500 hover:text-customblue'}`
+                        }>
+                            <HomeIcon className="h-6 w-6"/>
+                            <span>Trang chủ</span>
+                        </NavLink>
 
-                    <NavLink to="/restaurants" className={({isActive}) =>
-                        `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
-                    }>
-                        <BanknotesIcon className="h-6 w-6"/>
-                        <span>Nhà hàng</span>
-                    </NavLink>
+                        <NavLink to="/admin/restaurants" className={({isActive}) =>
+                            `flex mb-8 items-center gap-3 ${isActive ? 'text-customblue' : 'text-gray-500 hover:text-customblue'}`
+                        }>
+                            <HomeIcon className="h-6 w-6"/>
+                            <span>Danh sách nhà hàng</span>
+                        </NavLink>
 
-                    {/*<NavLink to="/messages" className={({isActive}) =>*/}
-                    {/*    `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`*/}
-                    {/*}>*/}
-                    {/*    <ChatBubbleLeftIcon className="h-6 w-6"/>*/}
-                    {/*    <span>Message</span>*/}
-                    {/*</NavLink>*/}
-
-                    {loginState && (
-                        <NavLink to="/history" className={({isActive}) =>
+                        <NavLink to="/admin/requests" className={({isActive}) =>
+                            `flex mb-8 items-center gap-3 ${isActive ? 'text-customblue' : 'text-gray-500 hover:text-customblue'}`
+                        }>
+                            <HomeIcon className="h-6 w-6"/>
+                            <span>Yêu cầu lập nhà hàng</span>
+                        </NavLink>
+                    </nav>
+                ) : (
+                    <nav className='space-y-6'>
+                        <NavLink to="/" className={({isActive}) =>
                             `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
                         }>
-                            <ClockIcon className="h-6 w-6"/>
-                            <span>Lịch sử đơn hàng</span>
+                            <HomeIcon className="h-6 w-6"/>
+                            <span>Trang chủ</span>
                         </NavLink>
-                    )}
 
-                    {loginState && isRestaurantOwner && (
-                        <div className="mb-8">
-                            <button
-                                type="button"
-                                className="flex items-center gap-3 text-gray-500 hover:text-primary w-full"
-                                onClick={() => setShowMyRestaurantOption((prev) => !prev)}
-                            >
-                                <ChartBarIcon className="h-6 w-6" />
-                                <span>Quản lý nhà hàng</span>
-                                <svg
-                                    className={`w-4 h-4 ml-auto transition-transform ${showMyRestaurantOption ? "rotate-180" : ""}`}
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
+                        <NavLink to="/restaurants" className={({isActive}) =>
+                            `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
+                        }>
+                            <BanknotesIcon className="h-6 w-6"/>
+                            <span>Nhà hàng</span>
+                        </NavLink>
+
+                        {/*<NavLink to="/messages" className={({isActive}) =>*/}
+                        {/*    `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`*/}
+                        {/*}>*/}
+                        {/*    <ChatBubbleLeftIcon className="h-6 w-6"/>*/}
+                        {/*    <span>Message</span>*/}
+                        {/*</NavLink>*/}
+
+                        {loginState && (
+                            <NavLink to="/history" className={({isActive}) =>
+                                `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
+                            }>
+                                <ClockIcon className="h-6 w-6"/>
+                                <span>Lịch sử đơn hàng</span>
+                            </NavLink>
+                        )}
+
+                        {loginState && isRestaurantOwner && (
+                            <div className="mb-8">
+                                <button
+                                    type="button"
+                                    className="flex items-center gap-3 text-gray-500 hover:text-primary w-full"
+                                    onClick={() => setShowMyRestaurantOption((prev) => !prev)}
                                 >
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </button>
-                            {showMyRestaurantOption && (
-                                <div className="ml-8 flex flex-col gap-2">
-                                    <NavLink
-                                        to={`/restaurants/${user.restaurantId}/revenue`}
-                                        className={({ isActive }) =>
-                                            `flex mt-5 items-center ${isActive ? "text-primary" : "text-gray-500 hover:text-primary"}`
-                                        }
+                                    <ChartBarIcon className="h-6 w-6"/>
+                                    <span>Quản lý nhà hàng</span>
+                                    <svg
+                                        className={`w-4 h-4 ml-auto transition-transform ${showMyRestaurantOption ? "rotate-180" : ""}`}
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
                                     >
-                                        <span>Doanh thu</span>
-                                    </NavLink>
-                                    <NavLink
-                                        to={`/restaurants/${user.restaurantId}/menu`}
-                                        className={({ isActive }) =>
-                                            `flex mt-3 items-center ${isActive ? "text-primary" : "text-gray-500 hover:text-primary"}`
-                                        }
-                                    >
-                                        <span>Thực đơn</span>
-                                    </NavLink>
-                                </div>
-                            )}
-                        </div>
-                    )}
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </button>
+                                {showMyRestaurantOption && (
+                                    <div className="ml-8 flex flex-col gap-2">
+                                        <NavLink
+                                            to={`/restaurants/${user.restaurantId}/revenue`}
+                                            className={({isActive}) =>
+                                                `flex mt-5 items-center ${isActive ? "text-primary" : "text-gray-500 hover:text-primary"}`
+                                            }
+                                        >
+                                            <span>Doanh thu</span>
+                                        </NavLink>
+                                        <NavLink
+                                            to={`/restaurants/${user.restaurantId}/menu`}
+                                            className={({isActive}) =>
+                                                `flex mt-3 items-center ${isActive ? "text-primary" : "text-gray-500 hover:text-primary"}`
+                                            }
+                                        >
+                                            <span>Thực đơn</span>
+                                        </NavLink>
+                                    </div>
+                                )}
+                            </div>
+                        )}
 
-                    {/*<NavLink to="/bills" className={({isActive}) =>*/}
-                    {/*    `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`*/}
-                    {/*}>*/}
-                    {/*    <BanknotesIcon className="h-6 w-6"/>*/}
-                    {/*    <span>Bills</span>*/}
-                    {/*</NavLink>*/}
+                        {/*<NavLink to="/bills" className={({isActive}) =>*/}
+                        {/*    `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`*/}
+                        {/*}>*/}
+                        {/*    <BanknotesIcon className="h-6 w-6"/>*/}
+                        {/*    <span>Bills</span>*/}
+                        {/*</NavLink>*/}
 
-                    <NavLink to="/settings" className={({isActive}) =>
-                        `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
-                    }>
-                        <Cog6ToothIcon className="h-6 w-6"/>
-                        <span>Cài đặt</span>
-                    </NavLink>
-                </nav>
+                        <NavLink to="/settings" className={({isActive}) =>
+                            `flex mb-8 items-center gap-3 ${isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'}`
+                        }>
+                            <Cog6ToothIcon className="h-6 w-6"/>
+                            <span>Cài đặt</span>
+                        </NavLink>
+                    </nav>
+                )}
             </div>
 
             <div className="mt-auto border-t pt-4 px-2">
@@ -161,16 +197,18 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
                         </Menu.Button>
                         <Menu.Items
                             className="absolute bottom-full mb-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                            <Menu.Item>
-                                {() => (
-                                    <NavLink
-                                        to="/profile"
-                                        className={`block px-4 py-2 text-sm`}
-                                    >
-                                        Thông tin cá nhân
-                                    </NavLink>
-                                )}
-                            </Menu.Item>
+                            {!isAdmin && (
+                                <Menu.Item>
+                                    {() => (
+                                        <NavLink
+                                            to="/profile"
+                                            className={`block px-4 py-2 text-sm`}
+                                        >
+                                            Thông tin cá nhân
+                                        </NavLink>
+                                    )}
+                                </Menu.Item>
+                            )}
                             <Menu.Item>
                                 {() => (
                                     <button

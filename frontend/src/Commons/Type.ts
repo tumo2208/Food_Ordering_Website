@@ -23,6 +23,7 @@ export interface Rating {
 export interface LoginData {
     email: string;
     password: string;
+    isAdmin: boolean;
 }
 
 export interface RegistrationUserData {
