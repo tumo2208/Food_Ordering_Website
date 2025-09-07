@@ -86,5 +86,17 @@ export interface FoodItem {
     restaurantId: string;
 }
 
+export interface RestaurantRegistrationData {
+    restaurantName: string;
+    contactNumber: string;
+    contactEmail: string;
+    locationAddress: string;
+    locationDistrict: string;
+    locationCity: string;
+    description: string;
+    operatingHours: string;
+    cuisineTypes: CuisineType[];
+    restaurantImage?: File | null;
+}
 
 

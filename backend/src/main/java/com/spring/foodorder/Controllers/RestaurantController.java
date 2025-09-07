@@ -6,8 +6,10 @@ import com.spring.foodorder.Exceptions.ResourceNotFoundException;
 import com.spring.foodorder.Documents.Restaurant;
 import com.spring.foodorder.Services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,8 +27,8 @@ public class RestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
-    @PostMapping("/register")
-    public ResponseEntity<?> registerRestaurant(@RequestBody RegistrationRestaurantForm registrationRestaurantForm) {
+    @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> registerRestaurant(@ModelAttribute RegistrationRestaurantForm registrationRestaurantForm) {
         try {
             restaurantService.requestRestaurantRegistration(registrationRestaurantForm);
             return ResponseEntity.ok("Request for restaurant registration submitted successfully. Please wait for approval.");

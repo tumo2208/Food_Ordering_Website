@@ -1,10 +1,14 @@
-import type {LoginData, RegistrationUserData, User} from "./Type.ts";
+import type {LoginData, RegistrationUserData, RestaurantRegistrationData, User} from "./Type.ts";
 import axios from 'axios';
 import qs from 'qs'
 
 export const api = axios.create({
     baseURL: 'http://localhost:3001',
 });
+
+/**
+ * Authentication function
+ */
 
 export async function register(registrationData:RegistrationUserData) {
     try {
@@ -33,6 +37,10 @@ export async function logout() {
     }
 }
 
+/**
+ * User functions
+ */
+
 export async function getUserProfile() {
     try {
         const response = await api.get('/user/profile', { withCredentials: true });
@@ -60,6 +68,10 @@ export async function changePassword(oldPassword: string, newPassword: string) {
         newPassword: newPassword
     }, { withCredentials: true });
 }
+
+/**
+ * Customer functions
+ */
 
 export async function searchFunction(query: String) {
     try {
@@ -159,6 +171,59 @@ export async function getFoodByRestaurantIdAndFoodTypes(restaurantId: string, cu
         return response.data.foodItems;
     } catch (error) {
         console.error('Get food by restaurant id and cuisine types failed: ', error);
+        throw error;
+    }
+}
+
+/**
+ * Restaurant owner functions
+ */
+
+export async function registerRestaurantOwner(registrationData: RestaurantRegistrationData) {
+    try {
+        const form = new FormData();
+        form.append('restaurantName', registrationData.restaurantName);
+        form.append('contactNumber', registrationData.contactNumber);
+        form.append('contactEmail', registrationData.contactEmail);
+        form.append('locationAddress', registrationData.locationAddress);
+        form.append('locationDistrict', registrationData.locationDistrict);
+        form.append('locationCity', registrationData.locationCity);
+        form.append('description', registrationData.description);
+        form.append('operatingHours', registrationData.operatingHours);
+        form.append('cuisineTypes', JSON.stringify(registrationData.cuisineTypes));
+        if (registrationData.restaurantImage) {
+            form.append('restaurantImage', registrationData.restaurantImage);
+        }
+        return await api.post('/restaurant/register', form, { withCredentials: true });
+    } catch (error) {
+        console.error('Restaurant owner registration error:', error);
+        throw error;
+    }
+}
+
+
+/**
+ * Admin functions
+ */
+
+export async function getAllRestaurantRegistrationRequests() {
+    try {
+        const response = await api.get("/admin/requests", { withCredentials: true });
+        return response.data;
+    } catch (error) {
+        console.error('Get restaurant registration requests failed: ', error);
+        throw error;
+    }
+}
+
+export async function approveRestaurantRegistration(requestId: string, status: "APPROVED" | "REJECTED") {
+    try {
+        return await api.post(`/admin/approveRequest`, {
+            requestId: requestId,
+            status: status
+        }, { withCredentials: true });
+    } catch (error) {
+        console.error('Approve restaurant registration request failed: ', error);
         throw error;
     }
 }

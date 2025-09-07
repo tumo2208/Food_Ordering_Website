@@ -48,7 +48,6 @@ const Restaurants = () => {
                     response = await getRestaurantsByCuisineType(cuisineType);
                 }
                 setLoading(false);
-                console.log(response.restaurants);
                 setFilteredRestaurants(response.restaurants);
             } catch (error) {
                 console.error("Fetching restaurants failed: ", error);

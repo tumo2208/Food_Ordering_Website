@@ -12,6 +12,7 @@ import Register from "./Pages/Auth/Register.tsx";
 import Profile from "./Pages/Profile/Profile.tsx";
 import ProfileEdit from "./Pages/Profile/ProfileEdit.tsx";
 import ChangePassword from "./Pages/Profile/ChangePassword.tsx";
+import RestaurantRegistration from "./Pages/Profile/RestaurantRegistration.tsx";
 import Category from "./Pages/Category/Category.tsx";
 
 import DashboardAdmin from "./Pages/Admin/DashboardAdmin.tsx";
@@ -34,6 +35,7 @@ function App() {
               <Route path={"/profile"} element={<Layout><Profile/></Layout>} />
               <Route path={"/profile/edit"} element={<Layout><ProfileEdit/></Layout>} />
               <Route path={"/profile/change-password"} element={<Layout><ChangePassword/></Layout>} />
+              <Route path={"/register-restaurant-owner"} element={<Layout><RestaurantRegistration/></Layout>} />
               <Route path="/cart" element={<RightSideBar />} />
 
               <Route path={"/admin"} element={<Layout><DashboardAdmin/></Layout>} />

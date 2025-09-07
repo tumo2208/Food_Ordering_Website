@@ -20,7 +20,7 @@ public class AdminController {
     private AdminService adminService;
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/")
+    @GetMapping("/requests")
     public ResponseEntity<?> getAllRestaurantRegistrationRequests() {
         try {
             return ResponseEntity.ok(adminService.getAllPendingRestaurantRegistrationRequests());
