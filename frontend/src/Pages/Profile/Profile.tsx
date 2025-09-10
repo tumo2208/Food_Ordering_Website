@@ -88,14 +88,18 @@ const Profile = () => {
                         <KeyIcon className="h-5 w-5"/>
                         Thay đổi mật khẩu
                     </button>
-                    { user.role === "CUSTOMER" && <button
-                        className="flex items-center justify-center gap-3 w-full bg-amber-500 text-white py-2 rounded-md font-bold hover:bg-amber-600 transition"
-                        onClick={() => navigate("/register-restaurant-owner")}
-                    >
-                        <UserPlusIcon className="h-5 w-5"/>
-                        Đăng ký làm chủ nhà hàng
-                    </button>
-                    }
+                    {user.role === "CUSTOMER" && (
+                        <button
+                            className={`flex items-center justify-center gap-3 w-full py-2 rounded-md font-bold 
+                                transition ${user.requestId ? "bg-gray-400 text-gray-200 cursor-not-allowed" : 
+                                "bg-amber-500 text-white hover:bg-amber-600"}`}
+                            onClick={() => navigate("/register-restaurant-owner")}
+                            disabled={!!user.requestId}
+                        >
+                            <UserPlusIcon className="h-5 w-5"/>
+                            Đăng ký làm chủ nhà hàng
+                        </button>
+                    )}
 
                 </div>
             </div>

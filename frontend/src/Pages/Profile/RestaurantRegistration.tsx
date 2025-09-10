@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 import {registerRestaurantOwner} from "../../Commons/ApiFunction.ts";
 import provinceData from "../../vietnam_provinces_with_districts.json";
 import CuisineTypeSelector from "../../Components/CuisineTypeSelector/CuisineTypeSelector.tsx";
+import Loading from "../../Components/Loading/Loading.tsx";
+import {useUser} from "../../Context/User/UserContext.tsx";
 
 const RestaurantRegistration = () => {
     const navigate = useNavigate();
+    const {setUser} = useUser();
+
     const [form, setForm] = useState({
         restaurantName: "",
         contactNumber: "",
@@ -21,7 +25,8 @@ const RestaurantRegistration = () => {
     const [cuisineTypes, setCuisineTypes] = useState<string[]>([]);
 
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
-    const [success, setSuccess] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
     const cities = Object.keys(provinceData);
     // @ts-ignore
@@ -72,17 +77,19 @@ const RestaurantRegistration = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true);
         if (!validate()) return;
         try {
             const response = await registerRestaurantOwner(form);
             if (response.status === 200) {
-                setSuccess(true);
-                setTimeout(() => navigate("/"), 2000);
+                setLoading(false);
+                setShowSuccessAlert(true);
+                setUser(prev => prev ? { ...prev, requestId: response.data } : prev);
             }
         } catch (error) {
             console.error("Registration error:", error);
+            setLoading(false);
         }
-
     };
 
     return (
@@ -91,11 +98,6 @@ const RestaurantRegistration = () => {
                 className="bg-white rounded-2xl shadow-xl p-10 w-full max-w-2xl"
                 onSubmit={handleSubmit}
             >
-                {success && (
-                    <div className="mb-4 text-green-600 font-semibold text-center">
-                        Registration submitted successfully!
-                    </div>
-                )}
                 <div className="grid grid-cols-1 gap-y-4 text-lg">
                     <div>
                         <label className="font-medium">Tên nhà hàng</label>
@@ -230,6 +232,26 @@ const RestaurantRegistration = () => {
                     </button>
                 </div>
             </form>
+
+            {loading && (<Loading/>)}
+
+            {showSuccessAlert && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
+                    <div className="bg-white rounded-xl shadow-lg p-8 text-center max-w-md w-full">
+                        <h2 className="text-xl font-bold mb-4">Đăng ký thành công!</h2>
+                        <p className="mb-6">
+                            Bạn đã đăng ký làm chủ nhà hàng thành công.<br/>
+                            Vui lòng chờ phản hồi của admin.
+                        </p>
+                        <button
+                            className="bg-amber-500 text-white px-6 py-2 rounded font-bold hover:bg-amber-600"
+                            onClick={() => navigate("/")}
+                        >
+                            Về trang chủ
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

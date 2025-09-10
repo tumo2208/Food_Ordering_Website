@@ -4,12 +4,6 @@ export type NationalCuisineType = keyof typeof NationalFoodTypeMap;
 export type CookingCuisineType = keyof typeof CookingFoodTypeMap;
 export type CuisineType = keyof typeof FoodTypeMap
 
-export interface FoodType {
-    id: number;
-    name: string;
-    image: string;
-}
-
 export interface SizeToPrice {
     size: string;
     price: number;
@@ -52,6 +46,7 @@ export interface User {
     gender: "MALE" | "FEMALE" | "OTHER";
     role: "CUSTOMER" | "RESTAURANT_OWNER" | "ADMIN";
     restaurantId?: string;
+    requestId?: string;
 }
 
 export interface Restaurant {

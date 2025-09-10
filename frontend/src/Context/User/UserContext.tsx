@@ -35,6 +35,7 @@ export const UserProvider = ({ children }: LayoutProps) => {
         gender: "OTHER",
         role: "CUSTOMER",
         restaurantId: "",
+        requestId: ""
     });
 
     useEffect(() => {

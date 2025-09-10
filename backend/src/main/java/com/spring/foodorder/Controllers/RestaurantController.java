@@ -30,12 +30,13 @@ public class RestaurantController {
     @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> registerRestaurant(@ModelAttribute RegistrationRestaurantForm registrationRestaurantForm) {
         try {
-            restaurantService.requestRestaurantRegistration(registrationRestaurantForm);
-            return ResponseEntity.ok("Request for restaurant registration submitted successfully. Please wait for approval.");
+            return ResponseEntity.ok(restaurantService.requestRestaurantRegistration(registrationRestaurantForm));
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body("Request for restaurant registration failed: You are already registered as a restaurant owner.");
+            return ResponseEntity.badRequest().body("Request for restaurant registration failed: " +
+                    "You are already registered as a restaurant owner.");
         } catch (ResourceNotFoundException e) {
-            return ResponseEntity.status(409).body("Request for restaurant registration failed: You must log in to register restaurant owner.");
+            return ResponseEntity.status(409).body("Request for restaurant registration failed: " +
+                    "You must log in to register restaurant owner.");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("An unexpected error occurred: " + e.getMessage());
         }

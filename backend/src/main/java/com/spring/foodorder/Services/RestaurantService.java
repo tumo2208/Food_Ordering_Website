@@ -40,7 +40,7 @@ public class RestaurantService{
     }
 
     // Method to request restaurant registration
-    public void requestRestaurantRegistration(RegistrationRestaurantForm form) {
+    public String requestRestaurantRegistration(RegistrationRestaurantForm form) {
         User currentUser = userService.getCurrentUser();
         if (currentUser.getRestaurantId() != null) {
             throw new IllegalArgumentException("You are already registered as a restaurant owner.");
@@ -70,6 +70,8 @@ public class RestaurantService{
 
         currentUser.setRequestId(request.getId());
         userRepository.save(currentUser);
+
+        return request.getId();
     }
 
     // Method to get restaurant by ID
