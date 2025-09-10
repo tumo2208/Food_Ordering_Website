@@ -1,4 +1,4 @@
-package com.spring.foodorder.DTOs;
+package com.spring.foodorder.DTOs.General;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

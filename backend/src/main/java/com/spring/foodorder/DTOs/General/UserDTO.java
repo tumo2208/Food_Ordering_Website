@@ -1,29 +1,24 @@
-package com.spring.foodorder.DTOs;
+package com.spring.foodorder.DTOs.General;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.spring.foodorder.Enums.Gender;
 import com.spring.foodorder.Enums.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
-public class RegistrationUserForm {
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserDTO {
     @Email(message = "Invalid email format")
     @NotBlank(message = "Email is required")
     private String email;
-
-    @NotBlank(message = "Password is required")
-    @Size(min = 6, message = "Password must be at least 6 characters long")
-    @Pattern(
-            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*_])[A-Za-z\\d!@#$%^&*_]{6,}$",
-            message = "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character"
-    )
-    private String password;
 
     @NotBlank(message = "Name is required")
     private String name;
@@ -47,5 +42,11 @@ public class RegistrationUserForm {
 
     private Gender gender;
 
-    private UserRole role = UserRole.CUSTOMER;
+    private UserRole role;
+
+    private String restaurantId;
+
+    private String requestId;
+
+    private LocalDate createdAt;
 }

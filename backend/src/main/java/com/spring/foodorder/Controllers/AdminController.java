@@ -1,6 +1,6 @@
 package com.spring.foodorder.Controllers;
 
-import com.spring.foodorder.DTOs.ApproveRequest;
+import com.spring.foodorder.DTOs.Admin.ApproveRequest;
 import com.spring.foodorder.Exceptions.ResourceAlreadyExistsException;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;
 import com.spring.foodorder.Services.AdminService;

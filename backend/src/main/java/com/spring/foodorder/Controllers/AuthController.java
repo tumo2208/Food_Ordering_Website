@@ -1,7 +1,7 @@
 package com.spring.foodorder.Controllers;
 
-import com.spring.foodorder.DTOs.LoginForm;
-import com.spring.foodorder.DTOs.RegistrationUserForm;
+import com.spring.foodorder.DTOs.Auth.LoginForm;
+import com.spring.foodorder.DTOs.Auth.RegistrationUserForm;
 import com.spring.foodorder.Exceptions.InvalidCredentialsException;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;
 import com.spring.foodorder.Security.JwtAuthFilter;

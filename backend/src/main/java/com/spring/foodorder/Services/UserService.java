@@ -1,9 +1,9 @@
 package com.spring.foodorder.Services;
 
-import com.spring.foodorder.DTOs.ChangePasswordForm;
-import com.spring.foodorder.DTOs.LoginForm;
-import com.spring.foodorder.DTOs.RegistrationUserForm;
-import com.spring.foodorder.DTOs.UserDTO;
+import com.spring.foodorder.DTOs.Auth.ChangePasswordForm;
+import com.spring.foodorder.DTOs.Auth.LoginForm;
+import com.spring.foodorder.DTOs.Auth.RegistrationUserForm;
+import com.spring.foodorder.DTOs.General.UserDTO;
 import com.spring.foodorder.Enums.UserRole;
 import com.spring.foodorder.Exceptions.ResourceAlreadyExistsException;
 import com.spring.foodorder.Exceptions.InvalidCredentialsException;

@@ -1,4 +1,4 @@
-package com.spring.foodorder.DTOs;
+package com.spring.foodorder.DTOs.General;
 
 import com.spring.foodorder.Objects.SizeToPrice;
 import jakarta.validation.constraints.NotBlank;

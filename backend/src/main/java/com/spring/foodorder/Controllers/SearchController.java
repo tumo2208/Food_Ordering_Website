@@ -1,6 +1,6 @@
 package com.spring.foodorder.Controllers;
 
-import com.spring.foodorder.DTOs.SearchResponse;
+import com.spring.foodorder.DTOs.General.SearchResponse;
 import com.spring.foodorder.Services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

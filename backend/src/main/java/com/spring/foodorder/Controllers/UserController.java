@@ -1,7 +1,7 @@
 package com.spring.foodorder.Controllers;
 
-import com.spring.foodorder.DTOs.ChangePasswordForm;
-import com.spring.foodorder.DTOs.UserDTO;
+import com.spring.foodorder.DTOs.Auth.ChangePasswordForm;
+import com.spring.foodorder.DTOs.General.UserDTO;
 import com.spring.foodorder.Exceptions.InvalidCredentialsException;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;
 import com.spring.foodorder.Services.UserService;

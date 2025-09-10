@@ -1,6 +1,6 @@
 package com.spring.foodorder.Controllers;
 
-import com.spring.foodorder.DTOs.FoodItemDTO;
+import com.spring.foodorder.DTOs.General.FoodItemDTO;
 import com.spring.foodorder.Enums.FoodType;
 import com.spring.foodorder.Exceptions.ResourceAlreadyExistsException;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;

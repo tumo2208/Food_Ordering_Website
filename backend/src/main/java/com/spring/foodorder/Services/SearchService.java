@@ -1,6 +1,6 @@
 package com.spring.foodorder.Services;
 
-import com.spring.foodorder.DTOs.SearchResponse;
+import com.spring.foodorder.DTOs.General.SearchResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
