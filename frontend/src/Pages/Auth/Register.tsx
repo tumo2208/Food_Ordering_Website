@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {register} from "../../Commons/ApiFunction.ts";
 import type {RegistrationUserData} from "../../Commons/Type.ts";
 import provinceData from "../../vietnam_provinces_with_districts.json";
+
+const backgroundImages = [
+    "https://res.cloudinary.com/dmphkmvyh/image/upload/v1757517825/r3_sth2vk.webp",
+    "https://res.cloudinary.com/dmphkmvyh/image/upload/v1757517825/r1_dsflru.jpg",
+    "https://res.cloudinary.com/dmphkmvyh/image/upload/v1757517825/r2_ty1xok.webp"
+];
 
 const Register = () => {
     const navigate = useNavigate();
@@ -28,9 +34,18 @@ const Register = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
+    const [bgIndex, setBgIndex] = useState(0);
+
     const cities = Object.keys(provinceData);
     // @ts-ignore
     const districts = formData.city ? provinceData[formData.city] : [];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setBgIndex(prev => (prev + 1) % backgroundImages.length);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, []);
 
     const setSelectedCity = (city: string) => {
         setFormData(prev => ({
@@ -86,7 +101,15 @@ const Register = () => {
 
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div
+            className="flex items-center justify-center min-h-screen"
+            style={{
+                backgroundImage: `url(${backgroundImages[bgIndex]})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                transition: "background-image 1s ease"
+            }}
+        >
             <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
                 <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
                 <form onSubmit={handleRegister} className="space-y-4">
@@ -241,7 +264,7 @@ const Register = () => {
                             required
                         >
                             <option value="">Chọn quận/huyện</option>
-                            {districts.map((district:string) => (
+                            {districts.map((district: string) => (
                                 <option key={district} value={district}>
                                     {district}
                                 </option>
