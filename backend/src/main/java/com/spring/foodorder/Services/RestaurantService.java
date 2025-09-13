@@ -1,6 +1,6 @@
 package com.spring.foodorder.Services;
 
-import com.spring.foodorder.DTOs.RegistrationRestaurantForm;
+import com.spring.foodorder.DTOs.RestaurantOwner.RegistrationRestaurantForm;
 import com.spring.foodorder.Documents.PendingRestaurantRegisterRequest;
 import com.spring.foodorder.Enums.FoodType;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;

@@ -1,4 +1,4 @@
-package com.spring.foodorder.DTOs;
+package com.spring.foodorder.DTOs.RestaurantOwner;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
