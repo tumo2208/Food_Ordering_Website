@@ -4,7 +4,6 @@ import com.spring.foodorder.DTOs.General.OrderRequest;
 import com.spring.foodorder.DTOs.General.OrderResponse;
 import com.spring.foodorder.DTOs.General.ChangeStatusOrderRequest;
 import com.spring.foodorder.Documents.Order;
-import com.spring.foodorder.Documents.User;
 import com.spring.foodorder.Enums.OrderStatus;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;
 import com.spring.foodorder.Repositories.OrderRepository;
@@ -21,7 +20,7 @@ public class OrderService {
     @Autowired
     private UserService userService;
 
-    public OrderResponse fromOrder(Order order) {
+    public static OrderResponse fromOrder(Order order) {
         OrderResponse response = new OrderResponse();
         response.setOrderId(order.getId());
         response.setUserId(order.getUserId());
@@ -54,11 +53,5 @@ public class OrderService {
                 .sum();
         newOrder.setTotalPrice(totalPrice);
         orderRepository.save(newOrder);
-    }
-
-    public List<OrderResponse> getHistoryOrders() {
-        User user = userService.getCurrentUser();
-        List<Order> orders = orderRepository.findByUserId(user.getId());
-        return orders.stream().map(order -> fromOrder(order)).toList();
     }
 }

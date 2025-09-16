@@ -3,13 +3,16 @@ package com.spring.foodorder.Services;
 import com.spring.foodorder.DTOs.Auth.ChangePasswordForm;
 import com.spring.foodorder.DTOs.Auth.LoginForm;
 import com.spring.foodorder.DTOs.Auth.RegistrationUserForm;
+import com.spring.foodorder.DTOs.General.OrderResponse;
 import com.spring.foodorder.DTOs.General.UserDTO;
+import com.spring.foodorder.Documents.Order;
 import com.spring.foodorder.Enums.UserRole;
 import com.spring.foodorder.Exceptions.ResourceAlreadyExistsException;
 import com.spring.foodorder.Exceptions.InvalidCredentialsException;
 import com.spring.foodorder.Exceptions.ResourceNotFoundException;
 import com.spring.foodorder.Objects.Address;
 import com.spring.foodorder.Documents.User;
+import com.spring.foodorder.Repositories.OrderRepository;
 import com.spring.foodorder.Repositories.UserRepository;
 import com.spring.foodorder.Security.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,8 +38,13 @@ public class UserService {
     @Autowired
     private TokenBlackListService tokenBlacklistService;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
+
+
     // Method to map UserEntity to User DTO
-    public UserDTO fromUser(User user) {
+    public static UserDTO fromUser(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setName(user.getName());
         userDTO.setEmail(user.getEmail());
@@ -159,5 +168,11 @@ public class UserService {
             currentUser.setGender(updatedUser.getGender());
         }
         userRepository.save(currentUser);
+    }
+
+    public List<OrderResponse> getHistoryOrders() {
+        User user = getCurrentUser();
+        List<Order> orders = orderRepository.findByUserId(user.getId());
+        return orders.stream().map(order -> OrderService.fromOrder(order)).toList();
     }
 }

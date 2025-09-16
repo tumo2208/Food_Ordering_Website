@@ -53,4 +53,15 @@ public class UserController {
             return ResponseEntity.status(500).body("An unexpected error occurred: " + e.getMessage());
         }
     }
+
+    @GetMapping("/history-orders")
+    public ResponseEntity<?> getOrderHistory() {
+        try {
+            return ResponseEntity.ok(userService.getHistoryOrders());
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(404).body("User not found: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("An error occurred while fetching order history: " + e.getMessage());
+        }
+    }
 }
