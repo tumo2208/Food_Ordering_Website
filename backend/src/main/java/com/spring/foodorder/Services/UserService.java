@@ -46,6 +46,7 @@ public class UserService {
     // Method to map UserEntity to User DTO
     public static UserDTO fromUser(User user) {
         UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
         userDTO.setName(user.getName());
         userDTO.setEmail(user.getEmail());
         userDTO.setPhoneNumber(user.getPhoneNumber());
@@ -174,5 +175,15 @@ public class UserService {
         User user = getCurrentUser();
         List<Order> orders = orderRepository.findByUserId(user.getId());
         return orders.stream().map(order -> OrderService.fromOrder(order)).toList();
+    }
+
+    public OrderResponse getOrderDetails(String orderId) {
+        User user = getCurrentUser();
+        Order order = orderRepository.findByOrderId(orderId)
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: " + orderId));
+        if (!order.getUserId().equals(user.getId())) {
+            throw new InvalidCredentialsException("You do not have permission to view this order");
+        }
+        return OrderService.fromOrder(order);
     }
 }

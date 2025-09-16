@@ -8,6 +8,7 @@ import com.spring.foodorder.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,6 +63,19 @@ public class UserController {
             return ResponseEntity.status(404).body("User not found: " + e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(500).body("An error occurred while fetching order history: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/order/{orderId}")
+    public ResponseEntity<?> getOrderDetails(@PathVariable String orderId) {
+        try {
+            return ResponseEntity.ok(userService.getOrderDetails(orderId));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(404).body("Order not found: " + e.getMessage());
+        }catch (InvalidCredentialsException e) {
+            return ResponseEntity.status(403).body("Access denied: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("An error occurred while fetching order details: " + e.getMessage());
         }
     }
 }

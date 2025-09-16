@@ -16,6 +16,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
+    private String id;
+
     @Email(message = "Invalid email format")
     @NotBlank(message = "Email is required")
     private String email;

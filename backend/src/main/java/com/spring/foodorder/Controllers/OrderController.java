@@ -21,8 +21,7 @@ public class OrderController {
     @PostMapping("/place")
     public ResponseEntity<?> placeOrder(@RequestBody OrderRequest orderRequest) {
         try {
-            orderService.placeOrder(orderRequest);
-            return ResponseEntity.ok("Order placed successfully");
+            return ResponseEntity.ok(orderService.placeOrder(orderRequest));
         } catch (Exception e) {
             return ResponseEntity.status(500).body("An error occurred while placing the order: " + e.getMessage());
         }

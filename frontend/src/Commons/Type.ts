@@ -94,4 +94,29 @@ export interface RestaurantRegistrationData {
     restaurantImage?: File | null;
 }
 
+export interface OrderItem {
+    itemId: string;
+    size: string;
+    name: string;
+    quantity: number;
+    price: number;
+}
+
+export interface OrderRequest {
+    userId: string;
+    items: OrderItem[];
+    address: string;
+}
+
+export interface Order {
+    orderId: string;
+    userId: string;
+    items: OrderItem[];
+    totalPrice: number;
+    status: string;
+    address: string;
+    createdAt: string;
+    doneAt?: string;
+}
+
 

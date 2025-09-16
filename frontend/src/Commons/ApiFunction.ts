@@ -1,4 +1,4 @@
-import type {LoginData, RegistrationUserData, RestaurantRegistrationData, User} from "./Type.ts";
+import type {LoginData, OrderRequest, RegistrationUserData, RestaurantRegistrationData, User} from "./Type.ts";
 import axios from 'axios';
 import qs from 'qs'
 
@@ -171,6 +171,24 @@ export async function getFoodByRestaurantIdAndFoodTypes(restaurantId: string, cu
         return response.data.foodItems;
     } catch (error) {
         console.error('Get food by restaurant id and cuisine types failed: ', error);
+        throw error;
+    }
+}
+
+export async function placeOrder(order: OrderRequest) {
+    try {
+        return await api.post('/orders/place', order, { withCredentials: true });
+    } catch (error) {
+        console.error('Place order error:', error);
+        throw error;
+    }
+}
+
+export async function getOrderDetails(orderId: string) {
+    try {
+        return await api.get(`/user/order/${orderId}`, { withCredentials: true });
+    } catch (error) {
+        console.error('Get order details error:', error);
         throw error;
     }
 }

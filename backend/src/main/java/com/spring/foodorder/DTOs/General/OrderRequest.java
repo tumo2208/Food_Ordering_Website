@@ -9,4 +9,5 @@ import java.util.List;
 public class OrderRequest {
     private String userId;
     List<OrderItem> items;
+    private String address;
 }

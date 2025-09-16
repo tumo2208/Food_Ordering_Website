@@ -23,7 +23,7 @@ public class Order {
     private String id;
 
     @Field("order_id")
-    private final String orderId = id.substring(id.length() - 6).toUpperCase();
+    private String orderId;
 
     @Field("user_id")
     private String userId;
@@ -36,6 +36,9 @@ public class Order {
 
     @Field("status")
     private OrderStatus status;
+
+    @Field("address")
+    private String address;
 
     @Field("created_at")
     private final LocalDate createdAt = LocalDate.now();

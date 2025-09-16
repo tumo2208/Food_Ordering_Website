@@ -10,15 +10,10 @@ import com.spring.foodorder.Repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
-
-    @Autowired
-    private UserService userService;
 
     public static OrderResponse fromOrder(Order order) {
         OrderResponse response = new OrderResponse();
@@ -27,6 +22,7 @@ public class OrderService {
         response.setItems(order.getItems());
         response.setTotalPrice(order.getTotalPrice());
         response.setStatus(order.getStatus().name());
+        response.setAddress(order.getAddress());
         response.setCreatedAt(order.getCreatedAt());
         response.setDoneAt(order.getDoneAt());
         return response;
@@ -43,15 +39,18 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    public void placeOrder(OrderRequest order) {
+    public String placeOrder(OrderRequest order) {
         Order newOrder = new Order();
         newOrder.setUserId(order.getUserId());
         newOrder.setItems(order.getItems());
         newOrder.setStatus(OrderStatus.PREPARING);
+        newOrder.setAddress(order.getAddress());
         double totalPrice = order.getItems().stream()
                 .mapToDouble(item -> item.getPrice() * item.getQuantity())
                 .sum();
         newOrder.setTotalPrice(totalPrice);
-        orderRepository.save(newOrder);
+        Order savedOrder = orderRepository.save(newOrder);
+
+        return savedOrder.getOrderId();
     }
 }

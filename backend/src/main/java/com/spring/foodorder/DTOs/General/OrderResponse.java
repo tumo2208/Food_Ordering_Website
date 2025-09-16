@@ -13,6 +13,7 @@ public class OrderResponse {
     private List<OrderItem> items;
     private double totalPrice;
     private String status;
+    private String address;
     private LocalDate createdAt;
     private LocalDate doneAt;
 }
