@@ -31,7 +31,6 @@ const LeftSideBar = ({isOpen,setIsOpen}:SideBarProps) => {
             setIsAdmin(false);
         }
         setLoginState(authenticated);
-        console.log("User: ", user);
     }, [user]);
 
     const handleLogout = async () => {

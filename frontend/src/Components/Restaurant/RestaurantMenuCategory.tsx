@@ -60,11 +60,23 @@ const RestaurantMenuCategory = ({restaurantId, restaurantName, foodItems}:Menu) 
                                 className="bg-primary text-white p-2 rounded-md hover:bg-amber-600 transition-colors"
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    dispatch(addItem({
-                                        item: item as any,
-                                        restaurantId: restaurantId,
-                                        restaurantName: restaurantName,
-                                    }))
+                                    if (!item.sizeToPrices || item.sizeToPrices.length === 0) return;
+
+                                    const defaultSize = item.sizeToPrices[0]; // luôn lấy size đầu tiên
+                                    dispatch(
+                                        addItem({
+                                            item: {
+                                                id: item.id,
+                                                name: item.name,
+                                                size: defaultSize.size,
+                                                price: defaultSize.price,
+                                                image: item.imgUrl ?? undefined,
+                                                sizeToPrices: item.sizeToPrices,
+                                            },
+                                            restaurantId,
+                                            restaurantName,
+                                        })
+                                    );
                                 }}
                             >
                                 <PlusIcon className="h-5 w-5"/>

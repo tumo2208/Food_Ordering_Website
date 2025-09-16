@@ -1,0 +1,232 @@
+[
+  {
+    "name": "Phở Bò Tái",
+    "sizeToPrices": [
+      { "size": "M", "price": 45000 },
+      { "size": "L", "price": 55000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Bún/Phở/Miến"],
+    "description": "Phở bò tái với thịt bò tươi, nước dùng đậm đà",
+    "image": null
+  },
+  {
+    "name": "Phở Bò Chín",
+    "sizeToPrices": [
+      { "size": "M", "price": 45000 },
+      { "size": "L", "price": 55000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Bún/Phở/Miến"],
+    "description": "Phở bò chín với thịt bò nấu mềm thơm",
+    "image": null
+  },
+  {
+    "name": "Phở Gà",
+    "sizeToPrices": [
+      { "size": "M", "price": 40000 },
+      { "size": "L", "price": 50000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Bún/Phở/Miến"],
+    "description": "Phở gà ta với nước dùng trong, ngọt thanh",
+    "image": null
+  },
+  {
+    "name": "Phở Đặc Biệt",
+    "sizeToPrices": [
+      { "size": "M", "price": 65000 },
+      { "size": "L", "price": 80000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Bún/Phở/Miến"],
+    "description": "Phở thập cẩm đầy đủ bò tái, chín, gầu, gân",
+    "image": null
+  },
+  {
+    "name": "Phở Bò Viên",
+    "sizeToPrices": [
+      { "size": "M", "price": 48000 },
+      { "size": "L", "price": 58000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Bún/Phở/Miến"],
+    "description": "Phở bò viên dai ngon, nước dùng đậm vị",
+    "image": null
+  },
+  {
+    "name": "Phở Bò Sốt Vang",
+    "sizeToPrices": [
+      { "size": "M", "price": 60000 },
+      { "size": "L", "price": 75000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Bún/Phở/Miến"],
+    "description": "Phở bò sốt vang hương vị đặc biệt, bò hầm mềm",
+    "image": null
+  },
+  {
+    "name": "Phở Hải Sản",
+    "sizeToPrices": [
+      { "size": "M", "price": 70000 },
+      { "size": "L", "price": 90000 }
+    ],
+    "cuisineTypes": ["Hải sản", "Bún/Phở/Miến"],
+    "description": "Phở hải sản tôm, mực, cá tươi ngon đặc trưng",
+    "image": null
+  },
+  {
+    "name": "Phở Chay",
+    "sizeToPrices": [
+      { "size": "M", "price": 40000 },
+      { "size": "L", "price": 50000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Bún/Phở/Miến"],
+    "description": "Phở chay thanh đạm với nấm, rau củ tươi",
+    "image": null
+  },
+  {
+    "name": "Phở Xào Bò",
+    "sizeToPrices": [
+      { "size": "M", "price": 50000 },
+      { "size": "L", "price": 65000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Đồ ăn nhanh"],
+    "description": "Bánh phở xào bò với rau cải giòn ngon",
+    "image": null
+  },
+  {
+    "name": "Phở Trộn",
+    "sizeToPrices": [
+      { "size": "M", "price": 45000 },
+      { "size": "L", "price": 55000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Đồ ăn nhanh"],
+    "description": "Phở trộn đậm đà với nước sốt đặc biệt",
+    "image": null
+  },
+  {
+    "name": "Phở Áp Chảo Hải Sản",
+    "sizeToPrices": [
+      { "size": "M", "price": 65000 },
+      { "size": "L", "price": 80000 }
+    ],
+    "cuisineTypes": ["Hải sản", "Đồ ăn nhanh"],
+    "description": "Phở áp chảo giòn rụm, hải sản sốt sệt thơm ngon",
+    "image": null
+  },
+  {
+    "name": "Phở Tái Gầu Gân",
+    "sizeToPrices": [
+      { "size": "M", "price": 52000 },
+      { "size": "L", "price": 65000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Bún/Phở/Miến"],
+    "description": "Phở tái gầu gân đầy đủ topping hấp dẫn",
+    "image": null
+  },
+  {
+    "name": "Cơm Rang Phở Bò",
+    "sizeToPrices": [
+      { "size": "M", "price": 55000 },
+      { "size": "L", "price": 70000 }
+    ],
+    "cuisineTypes": ["Cơm", "Đồ ăn nhanh"],
+    "description": "Cơm rang từ bánh phở thừa, bò và rau củ",
+    "image": null
+  },
+  {
+    "name": "Phở Cuốn",
+    "sizeToPrices": [
+      { "size": "M", "price": 50000 },
+      { "size": "L", "price": 65000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Đồ ăn nhanh"],
+    "description": "Phở cuốn Hà Nội cuốn thịt bò và rau sống",
+    "image": null
+  },
+  {
+    "name": "Phở Ngan",
+    "sizeToPrices": [
+      { "size": "M", "price": 55000 },
+      { "size": "L", "price": 70000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Bún/Phở/Miến"],
+    "description": "Phở ngan thơm lừng với thịt ngan béo ngậy",
+    "image": null
+  },
+  {
+    "name": "Phở Sườn Non",
+    "sizeToPrices": [
+      { "size": "M", "price": 60000 },
+      { "size": "L", "price": 75000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Món ăn từ thịt"],
+    "description": "Phở sườn non hầm mềm rục, nước dùng trong ngọt",
+    "image": null
+  },
+  {
+    "name": "Phở Vịt Quay",
+    "sizeToPrices": [
+      { "size": "M", "price": 65000 },
+      { "size": "L", "price": 85000 }
+    ],
+    "cuisineTypes": ["Việt Nam", "Món ăn từ thịt"],
+    "description": "Phở vịt quay da giòn, thịt thơm béo",
+    "image": null
+  },
+  {
+    "name": "Nước Sâm Mát",
+    "sizeToPrices": [
+      { "size": "M", "price": 15000 },
+      { "size": "L", "price": 20000 }
+    ],
+    "cuisineTypes": ["Đồ uống"],
+    "description": "Nước sâm mát lạnh giải nhiệt",
+    "image": null
+  },
+  {
+    "name": "Trà Đá",
+    "sizeToPrices": [
+      { "size": "M", "price": 5000 },
+      { "size": "L", "price": 8000 }
+    ],
+    "cuisineTypes": ["Đồ uống"],
+    "description": "Trà đá truyền thống, mát lạnh",
+    "image": null
+  },
+  {
+    "name": "Nước Ngọt Có Gas",
+    "sizeToPrices": [
+      { "size": "M", "price": 15000 },
+      { "size": "L", "price": 20000 }
+    ],
+    "cuisineTypes": ["Đồ uống"],
+    "description": "Nước ngọt giải khát nhiều hương vị",
+    "image": null
+  },
+  {
+    "name": "Chè Khúc Bạch",
+    "sizeToPrices": [
+      { "size": "M", "price": 25000 },
+      { "size": "L", "price": 35000 }
+    ],
+    "cuisineTypes": ["Tráng miệng"],
+    "description": "Chè khúc bạch thanh mát, hạnh nhân giòn",
+    "image": null
+  },
+  {
+    "name": "Bánh Flan",
+    "sizeToPrices": [
+      { "size": "M", "price": 20000 },
+      { "size": "L", "price": 30000 }
+    ],
+    "cuisineTypes": ["Tráng miệng", "Bánh ngọt"],
+    "description": "Bánh flan béo mịn, caramel thơm",
+    "image": null
+  },
+  {
+    "name": "Kem Trái Cây",
+    "sizeToPrices": [
+      { "size": "M", "price": 25000 },
+      { "size": "L", "price": 40000 }
+    ],
+    "cuisineTypes": ["Tráng miệng"],
+    "description": "Kem tươi mát với trái cây tươi",
+    "image": null
+  }
+]

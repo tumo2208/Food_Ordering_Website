@@ -9,7 +9,7 @@ const RightSideBar = () => {
     useEffect(() => {
         const authenticated = user !== null && user.email !== "";
         setLoginState(authenticated);
-    }, []);
+    }, [user]);
 
     if (!loginState) return null;
 
